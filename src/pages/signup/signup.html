@@ -1,0 +1,46 @@
+<ion-content class="bg">
+    <h2 ion-text color="light" class="signupTitle">xmoov</h2>
+    <div class="signup">
+        <ion-item class="upperField">
+            <ion-label floating>{{'NAME' | translate}}</ion-label>
+            <ion-input [ngModel]="driver.name" (ngModelChange)="driver.name=$event" type="text"></ion-input>
+        </ion-item>
+        <ion-item class="altBg">
+            <ion-label floating>{{'EMAIL' | translate}}</ion-label>
+            <ion-input [ngModel]="driver.email" (ngModelChange)="driver.email=$event" type="email"></ion-input>
+        </ion-item>
+        <ion-item class="altBg">
+            <ion-label floating>{{'PASSWORD' | translate}}</ion-label>
+            <ion-input [ngModel]="driver.password" (ngModelChange)="driver.password=$event" type="password"></ion-input>
+        </ion-item>
+        <ion-item class="altBg">
+            <ion-label floating>{{'RETYPEPASSWORD' | translate}}</ion-label>
+            <ion-input [ngModel]="driver.repassword" (ngModelChange)="driver.repassword=$event" type="password"></ion-input>
+        </ion-item>
+        <ion-item class="altBg">
+            <ion-label floating>{{'MOBILENO' | translate}}</ion-label>
+            <ion-input [ngModel]="driver.mobileNo" (ngModelChange)="driver.mobileNo=$event" type="tel"></ion-input>
+        </ion-item>
+
+        <ion-item class="altBg">
+            <ion-label floating>{{'VEHICLEREGNO' | translate}}</ion-label>
+            <ion-input [ngModel]="driver.vehicleRegNo" (ngModelChange)="driver.vehicleRegNo=$event" type="text"></ion-input>
+        </ion-item>
+        <ion-item class="lowerField">
+            <ion-label floating>{{'ADDRESS' | translate}}</ion-label>
+            <ion-textarea [ngModel]="driver.address" (ngModelChange)="driver.address=$event" row="4" type="text"></ion-textarea>
+        </ion-item>
+
+        <ion-row>
+            <ion-col>
+                <button ion-button block class="buttonItem" color="light" (click)="signup()">Submit</button>
+            </ion-col>
+            <ion-col>
+                <button ion-button block class="buttonItem" color="light" (click)="gotoLogin()">Back</button>
+            </ion-col>
+        </ion-row>
+
+
+    </div>
+
+</ion-content>

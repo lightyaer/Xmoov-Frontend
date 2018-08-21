@@ -1,0 +1,77 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>
+            {{title}}
+        </ion-title>
+        <ion-buttons end>
+            <button ion-button icon-only (click)="closeModal()">
+                <ion-icon name="close"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <ion-item>
+        <ion-label floating>{{'NAME' | translate}}</ion-label>
+        <ion-input [ngModel]="retailer.name" (ngModelChange)="retailer.name=$event" type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label floating>{{'COMPANY' | translate}}</ion-label>
+        <ion-input [ngModel]="retailer.company" (ngModelChange)="retailer.company=$event" type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label floating>{{'ADDRESS' | translate}}</ion-label>
+        <ion-input [ngModel]="retailer.address" (ngModelChange)="retailer.address=$event" type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label floating>{{'POSTALCODE' | translate}}</ion-label>
+        <ion-input [ngModel]="retailer.postalCode" (ngModelChange)="retailer.postalCode=$event" type="number"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label floating>{{'PHONE' | translate}}</ion-label>
+        <ion-input [ngModel]="retailer.phoneNo" (ngModelChange)="retailer.phoneNo=$event" type="tel"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label floating>{{'EMAIL' | translate}}</ion-label>
+        <ion-input [ngModel]="retailer.email" (ngModelChange)="retailer.email=$event" type="email"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label>{{'SHIPTODIFFLOC' | translate}}</ion-label>
+        <ion-checkbox [ngModel]="retailer.shipToSame" (ngModelChange)="retailer.shipToSame = $event"></ion-checkbox>
+    </ion-item>
+
+    <div *ngIf="retailer.shipToSame">
+        <ion-item>
+            <ion-label floating>{{'SHIPNAME' | translate}}</ion-label>
+            <ion-input [ngModel]="retailer.shipName" (ngModelChange)="retailer.shipName=$event" type="text"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label floating> {{'SHIPCOMPANY' | translate}}</ion-label>
+            <ion-input [ngModel]="retailer.shipCompany" (ngModelChange)="retailer.shipCompany=$event" type="text"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label floating>{{'SHIPADDRESS' | translate}}</ion-label>
+            <ion-input [ngModel]="retailer.shipAddress" (ngModelChange)="retailer.shipAddress=$event" type="text"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label floating>{{'SHIPPOSTCODE' | translate}}</ion-label>
+            <ion-input [ngModel]="retailer.shipPostalCode" (ngModelChange)="retailer.shipPostalCode=$event" type="number"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label floating>{{'SHIPPHONE' | translate}}</ion-label>
+            <ion-input [ngModel]="retailer.shipPhoneNo" (ngModelChange)="retailer.shipPhoneNo=$event" type="tel"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label floating> {{'SHIPEMAIL' | translate}}</ion-label>
+            <ion-input [ngModel]="retailer.shipEmail" (ngModelChange)="retailer.shipEmail=$event" type="email"></ion-input>
+        </ion-item>
+    </div>
+
+   
+        <button ion-button block class="buttonItem" color="light" (click)="saveRetailer()">Submit</button>
+
+
+
+
+</ion-content>

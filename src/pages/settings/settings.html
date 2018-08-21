@@ -1,0 +1,24 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>
+            Settings
+        </ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+
+    <ion-item>
+        <ion-label>
+            {{'LANGUAGE' | translate }}
+        </ion-label>
+
+    </ion-item>
+
+            <button ion-button block class="buttonItem" (click)="changeLanguagetoEnglish()" *ngIf="this.arabic" color="light"> {{ 'ENGLISH' | translate }}</button>
+  
+            <button ion-button block class="buttonItem" (click)="changeLanguagetoArabic()" *ngIf="this.english" color="light"> {{ 'ARABIC' | translate }}</button>
+    
+
+
+</ion-content>

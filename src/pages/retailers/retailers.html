@@ -1,0 +1,45 @@
+<ion-header>
+
+
+    <ion-searchbar [(ngModel)]="filters.name" [showCancelButton]="shouldShowCancel" (ionInput)="getAllRetailers()" (ionCancel)="getAllRetailers()">
+    </ion-searchbar>
+
+
+</ion-header>
+
+<ion-content>
+
+    <ion-list>
+        <ion-card *ngFor="let item of retailers" (press)="deleteRetailer(item._id)" (tap)="gotoEditRetailer(item._id)">
+
+            <ion-card-header>
+                {{item.name}}
+            </ion-card-header>
+            <ion-row>
+
+                <ion-col class="pl-18" col-12>
+                    {{item.address}}
+                </ion-col>
+
+                <ion-col class="pl-18">
+                    {{item.phoneNo}}
+                </ion-col>
+                <ion-col>
+                    {{item.email}}
+                </ion-col>
+
+            </ion-row>
+
+
+
+
+        </ion-card>
+    </ion-list>
+
+    <ion-fab bottom right>
+        <button ion-fab (click)="gotoAddRetailerPage()">
+            <ion-icon name="add"></ion-icon>
+        </button>
+    </ion-fab>
+
+</ion-content>

@@ -1,0 +1,13 @@
+<ion-content class="bg">
+    <div class="otpAuth">
+        <h2 ion-text color="light" class="otpAuthTitle">xmoov</h2>
+        <ion-item class="otp">
+            <ion-label floating> {{ 'OTP' | translate }} </ion-label>
+            <ion-input [ngModel]="otp" (ngModelChange)="otp=$event" max="6" type="number"></ion-input>
+        </ion-item>
+
+        <button ion-button block class="buttonItem" color="light" (click)="otpAuth()">Submit</button>
+
+    </div>
+
+</ion-content>

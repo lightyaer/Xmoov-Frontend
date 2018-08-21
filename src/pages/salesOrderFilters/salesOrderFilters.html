@@ -1,0 +1,41 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>
+                {{'SALESORDERFILTERS' | translate}}
+        </ion-title>
+        <ion-buttons end>
+            <button ion-button icon-only (click)="closeModal()">
+                <ion-icon name="close"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+<ion-content>
+    <ion-list>
+        <ion-item>
+            <ion-label>
+                    {{'ORDERSTATUS' | translate}}
+            </ion-label>
+            <ion-select [ngModel]="selectedOrderStatus" (ngModelChange)="selectedOrderStatus=$event">
+
+                <ion-option value="orderCreated">Order Created</ion-option>
+                <ion-option value="procured">Procured</ion-option>
+                <ion-option value="inTransit">In Transit</ion-option>
+                <ion-option value="delivered">Delivered</ion-option>
+                <ion-option value="cashCollected">Cash Collected</ion-option>
+
+            </ion-select>
+        </ion-item>
+        <ion-item>
+            <ion-label>
+                    {{'ORDERDATE' | translate}}
+            </ion-label>
+            <ion-datetime [ngModel]="filters.orderDate" (ngModelChange)="filters.orderDate=$event" (ionCancel)="clearOrderDate()"></ion-datetime>
+        </ion-item>
+
+        <button ion-button block (tap)="filterSalesOrders()"> Search </button>
+
+
+    </ion-list>
+
+</ion-content>
