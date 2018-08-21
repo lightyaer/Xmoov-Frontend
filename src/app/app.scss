@@ -14,3 +14,57 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
+
+.ion-card-header {
+    text-align: center;
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.deleteIon-icon{
+    display: inline-block;
+    font-size: 26px;
+    margin-top: 14px;
+    z-index: 99;
+
+}
+
+.toolbar-title-md {
+    margin: 0px 100px auto;
+    font-size: 2rem;
+    overflow: visible;
+    font-weight: 500;
+    color: #424242;
+}
+
+
+.buttonItem {
+    border-radius: 7px;
+    margin-top: 15px;
+    background-color:  #faffbd;
+    z-index: 10000;
+
+}
+
+.bottomButton{
+    bottom: 0px;
+    position: fixed;
+}
+
+.menuButton {
+    margin-bottom: 0px;
+    position: fixed;
+    bottom: 0px;
+}
+
+.pl-18{
+    padding-left: 18px;
+}
+
+.loading-wrapper  {
+    background-color: transparent !important;
+    box-shadow: none !important;
+    -webkit-box-shadow:none !important;
+}
