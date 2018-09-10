@@ -36,7 +36,9 @@
     "LANGUAGE": "لغة",
     "ARABIC": "عربى",
     "ENGLISH": "English",
-    "SALESORDERFILTERS":"فلتر أوامر المبيعات",
-    "ORDERSTATUS":"حالة الطلب",
-    "PURCHASEORDER":"أمر شراء"
+    "SALESORDERFILTERS": "فلتر أوامر المبيعات",
+    "ORDERSTATUS": "حالة الطلب",
+    "PURCHASEORDER": "أمر شراء",
+    "PRODUCT": "المنتج",
+    "PRICE": "السعر"
 }

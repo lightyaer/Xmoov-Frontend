@@ -1,21 +1,19 @@
 import { OrderStatus } from "./salesOrderFilters";
+import { Product } from "./product";
 
 export class SalesOrder {
     _id: string;
-    _retailer: string;
+    productObjects: Product[];
     orderDate: string;
-    itemCode: number;
-    itemType: string;
-    itemSubType: string;
-    itemName: string;
-    quantity: number;
-    unitPrice: number;
-    tax: number;
-    handling: number;
-    commission: number;
-    discount: number;
-    total: number;
-    grandTotal: number;
     orderStatus: OrderStatus;
-    remarks: string;
+    handling: number = 0;
+    discount: number = 0;
+    tax: number = 0;
+    total: number = 0;
+    commission: number = 0;
+    grandTotal: number = 0;
+    _author: string;
+    _retailer: string;
 }
+
+

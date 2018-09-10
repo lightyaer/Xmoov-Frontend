@@ -1,6 +1,6 @@
 export class SalesOrderFilters {
     orderDate: Date = new Date('9999');
-    itemName: string = "";
+    productName: string = "";
 }
 
 export class OrderStatus {

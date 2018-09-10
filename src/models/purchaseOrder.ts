@@ -1,15 +1,23 @@
+import { Product } from "./product";
+
+
 export class PurchaseOrder {
     _id: string;
-    _author: string;
-    _salesorder: string;
-    itemCode: number;
-    itemType: string;
-    itemSubType: string;
-    itemName: string;
-    remarks: string;
-    quantity: number;
     unitPrice: number;
     tax: number;
     discount: number;
     total: number;
+    _author: string;
+    _salesOrder: string;
+    _orderProduct: OrderProduct;
+    remarks: string;
+    __v: number;
+    product: Product;
 }
+
+export class OrderProduct {
+    _id: string;
+    _product: string;
+    quantity: number;
+}
+

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, MenuController, Events } from '@ionic/angular';
+import { NavController, NavParams, MenuController, Events } from 'ionic-angular';
 import { SalesOrdersPage } from '../salesOrders/salesOrders';
 import { RetailersPage } from '../retailers/retailers';
 import { PurchaseOrdersPage } from '../purchaseOrders/purchaseOrders';

@@ -36,7 +36,6 @@ export class SalesOrdersPage {
   }
 
   getAllSalesOrders() {
-
     this.salesOrderService.getAllSalesOrders(this.filters, this.orderStatus).then((res: SalesOrder[]) => {
       this.salesOrders = res
     }).catch(e => {

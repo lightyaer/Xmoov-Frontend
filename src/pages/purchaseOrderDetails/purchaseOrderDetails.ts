@@ -39,10 +39,10 @@ export class PurchaseOrderDetailsPage {
 
   }
 
-  calcTotal() {
-    let total = (+this.purchaseOrder.quantity * +this.purchaseOrder.unitPrice);
-    this.purchaseOrder.total = total + (total * (this.purchaseOrder.tax / 100)) - (this.purchaseOrder.discount);
-  }
+  // calcTotal() {
+  //   let total = (+this.purchaseOrder.quantity * +this.purchaseOrder.unitPrice);
+  //   this.purchaseOrder.total = total + (total * (this.purchaseOrder.tax / 100)) - (this.purchaseOrder.discount);
+  // }
 
   getPurchaseOrderByID(id: string) {
     this.purchaseOrderService.getPurchaseOrderByID(id)
@@ -58,13 +58,13 @@ export class PurchaseOrderDetailsPage {
       })
   }
 
-  validateValues(id: string) {
+  // validateValues(id: string) {
 
-    const salesOrder = this.salesOrders.find(item => item._id === id);
+  //   const salesOrder = this.salesOrders.find(item => item._id === id);
 
-    this.isValid = this.purchaseOrder.quantity <= salesOrder.quantity ? true : false;
+  //   this.isValid = this.purchaseOrder.quantity <= salesOrder.quantity ? true : false;
     
-  }
+  // }
 
   savePurchaseOrder() {
     if (this.isValid) {
@@ -109,21 +109,21 @@ export class PurchaseOrderDetailsPage {
     }
   }
 
-  changeValues(id: string) {
+  // changeValues(id: string) {
 
-    if (!this.navArgs.get('PurchaseOrderID')) {
-      let salesOrder = this.salesOrders.find(item => item._id === id);
+  //   if (!this.navArgs.get('PurchaseOrderID')) {
+  //     let salesOrder = this.salesOrders.find(item => item._id === id);
 
-      this.purchaseOrder.itemCode = salesOrder.itemCode;
-      this.purchaseOrder.itemName = salesOrder.itemName;
-      this.purchaseOrder.itemSubType = salesOrder.itemSubType;
-      this.purchaseOrder.itemType = salesOrder.itemType;
-      this.purchaseOrder.quantity = salesOrder.quantity;
-      this.purchaseOrder.unitPrice = salesOrder.unitPrice;
-    }
+  //     this.purchaseOrder.itemCode = salesOrder.itemCode;
+  //     this.purchaseOrder.itemName = salesOrder.itemName;
+  //     this.purchaseOrder.itemSubType = salesOrder.itemSubType;
+  //     this.purchaseOrder.itemType = salesOrder.itemType;
+  //     this.purchaseOrder.quantity = salesOrder.quantity;
+  //     this.purchaseOrder.unitPrice = salesOrder.unitPrice;
+  //   }
 
 
-  }
+  // }
 
   closeModal() {
     this.viewCtrl.dismiss();

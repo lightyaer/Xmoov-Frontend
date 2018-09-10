@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { NavController, AlertController, MenuController, LoadingController } from '@ionic/angular';
+import { NavController, AlertController, MenuController, LoadingController } from 'ionic-angular';
 import { Driver } from '../../models/driver';
 import { LoginProvider } from '../../services/driver.service';
 
@@ -22,7 +21,7 @@ export class LoginPage {
     private alertCtrl: AlertController,
     private menuCtrl: MenuController,
     private loadingCtrl: LoadingController,
-    private router: Router
+
   ) {
     this.loaderInit();
     this.menuCtrl.enable(false);
@@ -49,19 +48,19 @@ export class LoginPage {
     this.presentLoader();
     this.loginService.login(this.driver).then((driver: Driver) => {
       this.dismissLoader();
-      this.router.navigateByUrl('/homeTabs', {})
+      
       this.navCtrl.setRoot(HomeTabsPage, driver);
 
     }).catch(e => {
       this.dismissLoader();
 
-      this.alertCtrl.create({
-        header: 'Error',
-        subHeader: e.message,
+      let loginAlert = this.alertCtrl.create({
+        title: 'Error',
+        subTitle: e.message,
         buttons: ['Ok']
-      }).then((loginAlert) => {
-        loginAlert.present();
-      });
+      })
+      loginAlert.present();
+
 
     });
   }

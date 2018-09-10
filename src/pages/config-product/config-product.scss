@@ -1,0 +1,14 @@
+page-config-product {
+    .table-header {
+        font-weight: 500;
+        font-size: medium;
+        text-decoration: underline;
+        color: map-get($colors, quad);
+    }
+
+    .value {
+        font-size: smaller;
+        font-weight: 500;   
+        color: map-get($colors, quad);
+    }
+}

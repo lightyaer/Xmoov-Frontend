@@ -1,6 +1,5 @@
 <ion-header>
-    <ion-navbar>
-
+    <ion-navbar color="primary">
         <button ion-button icon-only menuToggle>
             <ion-icon name="menu"></ion-icon>
         </button>
@@ -12,8 +11,8 @@
 </ion-header>
 
 <ion-content>
-    <super-tabs [config]="{ sideMenu: 'left' }" toolbarColor="dark" toolbarBackground="light" indicatorColor="light" badgeColor="light"
-        selectedTabIndex="1">
+    <super-tabs [config]="{ sideMenu: 'left' }" toolbarColor="dark" toolbarBackground="secondary" indicatorColor="light"
+        badgeColor="light" selectedTabIndex="1">
         <super-tab [root]="PurchaseOrders" icon="pricetags" title="{{ 'PURCHASEORDER' | translate}}" [rootParams]="this.navData"></super-tab>
         <super-tab [root]="SalesOrders" icon="bus" title="{{ 'SALESORDER' | translate}}" [rootParams]="this.navData"></super-tab>
         <super-tab [root]="Retailers" icon="briefcase" title="{{ 'RETAILER' | translate}}" [rootParams]="this.navData"></super-tab>

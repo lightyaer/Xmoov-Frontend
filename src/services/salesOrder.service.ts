@@ -13,7 +13,7 @@ export class SalesOrderProvider {
     localUrl: string;
     productionUrl: string;
     constructor(public http: HttpClient) {
-       // this.localUrl = 'https://xmoov.herokuapp.com/';
+        // this.localUrl = 'https://xmoov.herokuapp.com/';
         this.localUrl = 'http://localhost:3000/';
     }
 
@@ -50,7 +50,7 @@ export class SalesOrderProvider {
         params = params.set('stageValue', String(stageValue));
 
         params = params.set('orderDate', new Date(filters.orderDate).getTime().toString());
-        params = params.set('itemName', String(filters.itemName));
+        params = params.set('name', String(filters.productName));
 
 
         let headers = new HttpHeaders({
@@ -149,7 +149,7 @@ export class SalesOrderProvider {
             this.http.delete(this.localUrl + 'salesorders/' + id, httpOptions).subscribe(res => {
                 resolve(res);
             }, (error) => {
-                
+
                 reject(error.error)
             })
         })

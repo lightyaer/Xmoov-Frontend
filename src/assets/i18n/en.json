@@ -36,8 +36,9 @@
     "LANGUAGE": "Language",
     "ARABIC": "عربى",
     "ENGLISH": "English",
-    "SALESORDERFILTERS":"Sales Order Filters",
-    "ORDERSTATUS":"Order Status",
-    "PURCHASEORDER":"Purchase Order"
-    
+    "SALESORDERFILTERS": "Sales Order Filters",
+    "ORDERSTATUS": "Order Status",
+    "PURCHASEORDER": "Purchase Order",
+    "PRODUCT": "Product",
+    "PRICE": "Price"
 }

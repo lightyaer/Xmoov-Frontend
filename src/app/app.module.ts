@@ -8,6 +8,7 @@ import { MyApp } from './app.component';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { SelectSearchableModule } from 'ionic-select-searchable';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -32,7 +33,9 @@ import { SettingsPage } from '../pages/settings/settings';
 import { SalesOrderFiltersPage } from '../pages/salesOrderFilters/salesOrderFilters';
 import { PurchaseOrdersPage } from '../pages/purchaseOrders/purchaseOrders';
 import { PurchaseOrderDetailsPage } from '../pages/purchaseOrderDetails/purchaseOrderDetails';
-import {  PurchaseOrderProvider } from '../services/purchaseOrder.service';
+import { PurchaseOrderProvider } from '../services/purchaseOrder.service';
+import { ProductProvider } from '../services/product.service';
+import { ConfigProductPage } from '../pages/config-product/config-product';
 
 
 let pages = [
@@ -49,7 +52,8 @@ let pages = [
   RetailerDetailsPage,
   SalesOrderFiltersPage,
   PurchaseOrdersPage,
-  PurchaseOrderDetailsPage
+  PurchaseOrderDetailsPage,
+  ConfigProductPage
 ]
 
 
@@ -68,7 +72,8 @@ let pages = [
         deps: [HttpClient]
       }
     }),
-    HttpClientModule
+    HttpClientModule,
+    SelectSearchableModule
   ],
   bootstrap: [IonicApp],
   entryComponents: pages,
@@ -79,6 +84,7 @@ let pages = [
     LoginProvider,
     RetailerProvider,
     SalesOrderProvider,
+    ProductProvider,
     PurchaseOrderProvider
   ]
 })

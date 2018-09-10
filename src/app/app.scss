@@ -39,18 +39,29 @@
     color: #424242;
 }
 
+.centeredTitle {
+    text-align: -webkit-right;
+}
+
 
 .buttonItem {
     border-radius: 7px;
     margin-top: 15px;
-    background-color:  #faffbd;
-    z-index: 10000;
+    z-index: 100;
 
+}
+
+.margin-b55 {
+    margin-bottom: 55px;
 }
 
 .bottomButton{
     bottom: 0px;
     position: fixed;
+    margin-bottom: 0px;
+    padding: 25px;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
 }
 
 .menuButton {

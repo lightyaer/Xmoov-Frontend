@@ -1,12 +1,14 @@
 <ion-content class="bg">
+
     <div class="login">
 
         <h2 ion-text color="light" class="loginTitle">xmoov</h2>
-
+    
         <ion-item class="email">
             <ion-label floating> {{'EMAIL' | translate}} </ion-label>
             <ion-input [ngModel]="driver.email" (ngModelChange)="driver.email=$event" type="email"></ion-input>
         </ion-item>
+ 
         <ion-item class="password">
             <ion-label floating> {{'PASSWORD' | translate}} </ion-label>
             <ion-input [ngModel]="driver.password" (ngModelChange)="driver.password=$event" type="password"></ion-input>

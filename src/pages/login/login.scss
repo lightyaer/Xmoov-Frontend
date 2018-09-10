@@ -1,46 +1,50 @@
-.login {
-    margin-top: 20vh;
-    padding: 0px 10px;
-    width: 100%;
-    display: inline-block;
-}
-
-
-.altBg{
-    background-color: #faffbd;
-}
-
-.centered{
-    text-align: center
-}
-
-.bg{
-    background-color: cadetblue;
-}
-
-.email {
-    padding-top:10px;
-    border-radius: 10px 10px 0 0;
+page-login {
+    .login {
+        margin-top: 20vh;
+        padding: 0px 10px;
+        width: 100%;
+        display: inline-block;
+    }
     
-}
+    // .altBg{
+    //     background-color: #faffbd;
+    // }
+    
+    .centered{
+        text-align: center
+    }
+    
+    .bg{
+        background-color: #A0AEC1;
+    }
+    
+    .email {
+        padding-top:10px;
+        border-radius: 10px 10px 0 0;
+        
+    }
+    
+    .password{
+        border-radius: 0 0 10px 10px;
+        padding-bottom: 10px;
+    }
+    
+    
+    .button-md {
+        height: 4.6rem;
+    }
+    
+    .loginTitle{
+        text-align: center;
+        text-shadow: 2px 2px 10px black;
+        font-size: 5.6rem;
+        margin-top: -4.4rem;
+        margin-bottom: 1rem;
+        font-weight: 500;
+        line-height: 1.2;
+    }
 
-.password{
-    border-radius: 0 0 10px 10px;
-
-    padding-bottom: 10px;
-}
-
-
-.button-md {
-    height: 4.6rem;
-}
-
-.loginTitle{
-    text-align: center;
-    text-shadow: 2px 2px 10px black;
-    font-size: 5.6rem;
-    margin-top: -4.4rem;
-    margin-bottom: 1rem;
-    font-weight: 500;
-    line-height: 1.2;
+    input.text-input:-webkit-autofill {
+        background-color: transparent !important;
+    }
 }
