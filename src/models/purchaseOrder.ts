@@ -3,16 +3,17 @@ import { Product } from "./product";
 
 export class PurchaseOrder {
     _id: string;
-    unitPrice: number;
-    tax: number;
-    discount: number;
-    total: number;
+    tax: number = 0;
+    discount: number = 0;
+    total: number = 0;
     _author: string;
     _salesOrder: string;
-    _orderProduct: OrderProduct;
+    productObjects: OrderProduct[];
     remarks: string;
     __v: number;
-    product: Product;
+    products: Product[];
+    grandTotal: number = 0;
+
 }
 
 export class OrderProduct {

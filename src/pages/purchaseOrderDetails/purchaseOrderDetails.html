@@ -1,6 +1,6 @@
 <ion-header>
     <ion-navbar color="primary">
-        <ion-title>
+        <ion-title class="centeredText">
             {{title}}
         </ion-title>
         <ion-buttons end>
@@ -17,49 +17,55 @@
         <ion-label floating> {{'SALESORDER' | translate}} </ion-label>
         <ion-select interface="popover" [ngModel]="purchaseOrder._salesOrder" (ngModelChange)="purchaseOrder._salesOrder = $event"
             (ionChange)="changeValues(purchaseOrder._salesOrder)">
-            <ion-option *ngFor="let item of salesOrders" [value]="item._id">{{item.itemName}}</ion-option>
+            <ion-option *ngFor="let item of salesOrders" [value]="item._id">{{item.remarks}}</ion-option>
         </ion-select>
     </ion-item>
 
     <ion-item>
-        <ion-label floating>{{'ITEMCODE' | translate}}</ion-label>
-        <ion-input [ngModel]="purchaseOrder.itemCode" (ngModelChange)="purchaseOrder.itemCode=$event" type="text "></ion-input>
+        <ion-label floating>
+            {{'PRODUCT' | translate}}
+        </ion-label>
+        <select-searchable #productComponent item-content [(ngModel)]="selectedProducts" [items]="products"
+            itemValueField="_id" headerColor="primary" [focusSearchbar]="true" [canSearch]="true" [isMultiple]="true"
+            (onChange)="productChange($event)">
+            <ng-template selectSearchableValueTemplate let-selectedProducts="value">
+                <div class="select-searchable-value-item" *ngFor="let product of selectedProducts">
+                    <div *ngIf="currentLang === 'en'">
+                        {{product.nameEn}} &nbsp; &nbsp; ({{product.quantity}})
+                    </div>
+                    <div *ngIf="currentLang === 'ar'">
+                        {{product.nameAr}} &nbsp; &nbsp; ({{product.quantity}})
+                    </div>
+                </div>
+            </ng-template>
+        </select-searchable>
     </ion-item>
     <ion-item>
-        <ion-label floating>{{'ITEMNAME' | translate}}</ion-label>
-        <ion-input [ngModel]="purchaseOrder.itemName" (ngModelChange)="purchaseOrder.itemName=$event" type="text "></ion-input>
+        <ion-label floating>{{'REMARKS' | translate}}</ion-label>
+        <ion-input [ngModel]="purchaseOrder.remarks" (ngModelChange)="purchaseOrder.remarks=$event" type="text"></ion-input>
     </ion-item>
     <ion-item>
-        <ion-label floating>{{'ITEMTYPE' | translate}}</ion-label>
-        <ion-input [ngModel]="purchaseOrder.itemType" (ngModelChange)="purchaseOrder.itemType=$event" type="text"></ion-input>
-    </ion-item>
-    <ion-item>
-        <ion-label floating>{{'ITEMSUBTYPE' | translate}}</ion-label>
-        <ion-input [ngModel]="purchaseOrder.itemSubType" (ngModelChange)="purchaseOrder.itemSubType=$event" type="text "></ion-input>
-    </ion-item>
-    <ion-item>
-        <ion-label floating>{{'QUANTITY' | translate}}</ion-label>
-        <ion-input [ngClass]="(isValid) ? 'correct' : 'err' " [ngModel]="purchaseOrder.quantity" (ngModelChange)="purchaseOrder.quantity=$event"
-            type="number" (ngModelChange)="validateValues(purchaseOrder._salesOrder);calcTotal();"></ion-input>
-    </ion-item>
-    <ion-item>
-        <ion-label floating>{{'UNITPRICE' | translate}}</ion-label>
-        <ion-input [ngModel]="purchaseOrder.unitPrice" (ngModelChange)="purchaseOrder.unitPrice=$event" type="number" (ngModelChange)="calcTotal()"></ion-input>
-    </ion-item>
-
-    <ion-item>
-        <ion-label floating>{{'TAX' | translate}}</ion-label>
-        <ion-input [ngModel]="purchaseOrder.tax" (ngModelChange)="purchaseOrder.tax=$event" type="number" (ngModelChange)="calcTotal()"></ion-input>
-    </ion-item>
-    <ion-item>
-        <ion-label floating>{{'DISCOUNT' | translate}}</ion-label>
-        <ion-input [ngModel]="purchaseOrder.discount" (ngModelChange)="purchaseOrder.discount=$event" type="number" (ngModelChange)="calcTotal()"></ion-input>
-    </ion-item>
-    <ion-item style="margin-bottom: 55px">
         <ion-label floating>{{'TOTAL' | translate}}</ion-label>
         <ion-input readonly="true" [ngModel]="purchaseOrder.total" (ngModelChange)="purchaseOrder.total=$event" type="number"></ion-input>
     </ion-item>
+    <ion-item>
+        <ion-label floating>{{'TAX' | translate}}</ion-label>
+        <ion-input [ngModel]="purchaseOrder.tax" (ngModelChange)="purchaseOrder.tax=$event" type="number"
+            (ngModelChange)="calcTotal()"></ion-input>
+    </ion-item>
+
+    <ion-item>
+        <ion-label floating>{{'DISCOUNT' | translate}}</ion-label>
+        <ion-input [ngModel]="purchaseOrder.discount" (ngModelChange)="purchaseOrder.discount=$event" type="number"
+            (ngModelChange)="calcTotal()"></ion-input>
+    </ion-item>
+    <ion-item style="margin-bottom: 55px">
+        <ion-label floating>{{'GRANDTOTAL' | translate}}</ion-label>
+        <ion-input readonly="true" [ngModel]="purchaseOrder.grandTotal" (ngModelChange)="purchaseOrder.grandTotal=$event"
+            type="number" (ngModelChange)="calcTotal()"></ion-input>
+    </ion-item>
+
 </ion-content>
 <div position="bottom">
-    <button *ngIf="isValid" ion-button block class="buttonItem bottomButton" color="light" (click)="savePurchaseOrder()">Submit</button>
+    <button *ngIf="isValid" ion-button block class="buttonItem bottomButton" color="primary" (click)="savePurchaseOrder()">Submit</button>
 </div>

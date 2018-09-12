@@ -1,7 +1,7 @@
 <ion-header>
-    <ion-navbar>
-        <ion-title>
-                {{'SALESORDERFILTERS' | translate}}
+    <ion-navbar color="primary">
+        <ion-title class="centeredText">
+            {{'SALESORDERFILTERS' | translate}}
         </ion-title>
         <ion-buttons end>
             <button ion-button icon-only (click)="closeModal()">
@@ -14,7 +14,7 @@
     <ion-list>
         <ion-item>
             <ion-label>
-                    {{'ORDERSTATUS' | translate}}
+                {{'ORDERSTATUS' | translate}}
             </ion-label>
             <ion-select [ngModel]="selectedOrderStatus" (ngModelChange)="selectedOrderStatus=$event">
 
@@ -28,7 +28,7 @@
         </ion-item>
         <ion-item>
             <ion-label>
-                    {{'ORDERDATE' | translate}}
+                {{'ORDERDATE' | translate}}
             </ion-label>
             <ion-datetime [ngModel]="filters.orderDate" (ngModelChange)="filters.orderDate=$event" (ionCancel)="clearOrderDate()"></ion-datetime>
         </ion-item>

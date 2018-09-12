@@ -7,6 +7,7 @@ import { SalesOrderDetailsPage } from '../salesOrderDetails/salesOrderDetails';
 import { SalesOrderFilters } from '../../models/salesOrderFilters';
 import { OrderStatus } from '../../models/orderStatus';
 import { SalesOrderFiltersPage } from '../salesOrderFilters/salesOrderFilters';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'page-salesOrders',
@@ -15,17 +16,19 @@ import { SalesOrderFiltersPage } from '../salesOrderFilters/salesOrderFilters';
 export class SalesOrdersPage {
 
 
+  currentLang: String;
   salesOrders: SalesOrder[];
   filters: SalesOrderFilters = new SalesOrderFilters();
   orderStatus: OrderStatus = new OrderStatus();
   constructor(public navCtrl: NavController,
     private salesOrderService: SalesOrderProvider,
-    public alertCtrl: AlertController,
-    public toastCtrl: ToastController,
-    public modalCtrl: ModalController
+    private alertCtrl: AlertController,
+    private toastCtrl: ToastController,
+    private modalCtrl: ModalController,
+    private translate: TranslateService
   ) {
 
-
+    this.currentLang = this.translate.getDefaultLang();
     this.getAllSalesOrders();
   }
 
@@ -33,13 +36,16 @@ export class SalesOrdersPage {
     let modal = this.modalCtrl.create(SalesOrderDetailsPage, { title: 'Edit Sales Order', id: id });
 
     modal.present();
+    modal.onDidDismiss(() => {
+      this.getAllSalesOrders();
+    })
   }
 
   getAllSalesOrders() {
     this.salesOrderService.getAllSalesOrders(this.filters, this.orderStatus).then((res: SalesOrder[]) => {
       this.salesOrders = res
     }).catch(e => {
-      console.log(e);
+
     })
   }
 

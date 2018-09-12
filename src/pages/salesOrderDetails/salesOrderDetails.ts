@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { NavController, ViewController, NavParams, ToastController, AlertController, LoadingController, ModalController } from 'ionic-angular';
 import { SalesOrder } from '../../models/salesOrder';
 import { SalesOrderProvider } from '../../services/salesOrder.service';
@@ -28,6 +28,10 @@ export class SalesOrderDetailsPage {
     retailers: Retailer[];
     products: Product[];
     selectedProducts: Product[];
+    currentLang: string;
+
+    @ViewChild('productComponent') productComponent: SelectSearchableComponent;
+
     constructor(public navCtrl: NavController,
         private viewCtrl: ViewController,
         private navArgs: NavParams,
@@ -40,12 +44,28 @@ export class SalesOrderDetailsPage {
         private productService: ProductProvider,
         private translate: TranslateService
     ) {
-        this.title = this.navArgs.data.title;
+        this.currentLang = this.translate.getDefaultLang();
         this.getAllRetailers();
         if (this.navArgs.data.id) {
+            this.title = this.translate.instant('EDIT') + " " + this.translate.instant('SALESORDER')
             this.presentLoader();
             this.salesOrder._id = this.navArgs.data.id;
             this.getSalesOrderByID(this.salesOrder._id);
+        } else {
+            this.title = this.translate.instant('CREATE') + " " + this.translate.instant('SALESORDER')
+        }
+    }
+
+
+    ionViewDidLoad() {
+        if (this.currentLang === 'en') {
+            this.productComponent.itemTextField = "nameEn"
+            this.productComponent.searchFailText = "No Products found."
+            this.productComponent.searchPlaceholder = "Enter Product name";
+        } else {
+            this.productComponent.itemTextField = "nameAr"
+            this.productComponent.searchFailText = "لم يتم العثور على منتجات"
+            this.productComponent.searchPlaceholder = "أدخل اسم المنتج";
         }
     }
 
@@ -66,7 +86,7 @@ export class SalesOrderDetailsPage {
     }
 
     calcTotal() {
-        console.log(this.salesOrder.productObjects);
+
 
         this.salesOrder.total = 0;
         this.salesOrder.productObjects.map(item => {
@@ -77,21 +97,22 @@ export class SalesOrderDetailsPage {
             +(+(+this.salesOrder.tax / 100) * +this.salesOrder.total) +
             (+this.salesOrder.commission) + (+this.salesOrder.handling) -
             +this.salesOrder.discount;
-        console.log(this.salesOrder.total);
-        console.log(this.salesOrder.grandTotal);
+        this.salesOrder.total = +this.salesOrder.total.toFixed(2)
+        this.salesOrder.grandTotal = +this.salesOrder.grandTotal.toFixed(2);
 
     }
+
+
+
 
     searchProducts(event: {
         component: SelectSearchableComponent,
         text: string
     }) {
-        let lang;
         let name = event.text;
         if (name.length >= 3) {
             event.component.startSearch();
-            lang = this.translate.getDefaultLang();
-            this.productService.getAllProducts(name, lang).then((res: Product[]) => {
+            this.productService.getAllProducts(name, this.currentLang).then((res: Product[]) => {
                 event.component.items = res;
 
                 // Get ports from a storage and stop searching.
@@ -136,9 +157,9 @@ export class SalesOrderDetailsPage {
 
     saveSalesOrder() {
         this.salesOrder.orderStatus = this.orderStatus;
-        console.log(this.salesOrder.orderDate);
+
         this.salesOrder.orderDate = new Date(this.salesOrder.orderDate).getTime().toString();
-        console.log(this.salesOrder.orderDate);
+
         if (!this.navArgs.data.id) {
             this.salesOrderService.saveSalesOrder(this.salesOrder).then((res) => {
                 let toast = this.toastCtrl.create({
@@ -176,6 +197,7 @@ export class SalesOrderDetailsPage {
                     })
                     alert.present();
                 })
+            this.viewCtrl.dismiss();
         }
     }
 

@@ -4,6 +4,7 @@ import { PurchaseOrderProvider } from '../../services/purchaseOrder.service';
 import { PurchaseOrder } from '../../models/purchaseOrder';
 import { PurchaseOrderFilters } from '../../models/purchaseOrderFilters';
 import { PurchaseOrderDetailsPage } from '../purchaseOrderDetails/purchaseOrderDetails';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
     selector: 'page-purchaseOrders',
@@ -11,6 +12,7 @@ import { PurchaseOrderDetailsPage } from '../purchaseOrderDetails/purchaseOrderD
 })
 export class PurchaseOrdersPage {
 
+    currentLang: string;
     purchaseOrders: PurchaseOrder[];
     filters: PurchaseOrderFilters = new PurchaseOrderFilters();
 
@@ -19,9 +21,10 @@ export class PurchaseOrdersPage {
         private purchaseOrderService: PurchaseOrderProvider,
         private modalCtrl: ModalController,
         private alertCtrl: AlertController,
-        private toastCtrl: ToastController
+        private toastCtrl: ToastController,
+        private translate: TranslateService
     ) {
-
+        this.currentLang = this.translate.getDefaultLang();
         this.getAllPurchaseOrders();
 
     }

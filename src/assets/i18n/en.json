@@ -40,5 +40,9 @@
     "ORDERSTATUS": "Order Status",
     "PURCHASEORDER": "Purchase Order",
     "PRODUCT": "Product",
-    "PRICE": "Price"
+    "PRICE": "Price",
+    "SELECTQUANTITIES": "Select Quantities",
+    "SETTINGS": "Settings",
+    "CREATE": "Add",
+    "EDIT": "Edit"
 }

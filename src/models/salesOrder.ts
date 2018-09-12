@@ -14,6 +14,7 @@ export class SalesOrder {
     grandTotal: number = 0;
     _author: string;
     _retailer: string;
+    remarks: string;
 }
 
 

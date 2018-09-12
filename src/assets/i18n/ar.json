@@ -40,5 +40,9 @@
     "ORDERSTATUS": "حالة الطلب",
     "PURCHASEORDER": "أمر شراء",
     "PRODUCT": "المنتج",
-    "PRICE": "السعر"
+    "PRICE": "السعر",
+    "SELECTQUANTITIES": "اختر الكميات",
+    "SETTINGS": "إعدادات",
+    "CREATE": "خلق",
+    "EDIT": "تصحيح"
 }

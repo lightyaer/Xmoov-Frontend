@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { NavController, ViewController, ToastController, AlertController } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { NavController, ViewController, ToastController, AlertController, ModalController } from 'ionic-angular';
 import { PurchaseOrderProvider } from '../../services/purchaseOrder.service';
 import { PurchaseOrder } from '../../models/purchaseOrder';
 import { SalesOrderProvider } from '../../services/salesOrder.service';
@@ -7,6 +7,10 @@ import { SalesOrderFilters } from '../../models/salesOrderFilters';
 import { OrderStatus } from '../../models/orderStatus';
 import { SalesOrder } from '../../models/salesOrder';
 import { NavParams } from 'ionic-angular/navigation/nav-params';
+import { TranslateService } from '@ngx-translate/core';
+import { Product } from '../../models/product';
+import { SelectSearchableComponent } from 'ionic-select-searchable';
+import { ConfigProductPage } from '../config-product/config-product';
 
 
 @Component({
@@ -20,7 +24,11 @@ export class PurchaseOrderDetailsPage {
   purchaseOrder: PurchaseOrder = new PurchaseOrder();
   salesOrderFilters: SalesOrderFilters = new SalesOrderFilters();
   orderStatus: OrderStatus = new OrderStatus();
+  selectedProducts: Product[];
   salesOrders: SalesOrder[];
+  products: Product[];
+  currentLang: string;
+  @ViewChild('productComponent') productComponent: SelectSearchableComponent;
 
   constructor(public navCtrl: NavController,
     private navArgs: NavParams,
@@ -28,21 +36,50 @@ export class PurchaseOrderDetailsPage {
     private viewCtrl: ViewController,
     private salesOrderService: SalesOrderProvider,
     private toastCtrl: ToastController,
-    private alertCtrl: AlertController
+    private alertCtrl: AlertController,
+    private translate: TranslateService,
+    private modalCtrl: ModalController,
+
   ) {
-    this.title = this.navArgs.get('Title');
+    this.currentLang = this.translate.getDefaultLang();
+
     this.purchaseOrder._id = this.navArgs.get('PurchaseOrderID');
     this.getAllSalesOrders();
     if (this.purchaseOrder._id) {
+      this.title = this.translate.instant('EDIT') + " " + this.translate.instant('PURCHASEORDER');
       this.getPurchaseOrderByID(this.purchaseOrder._id);
+    } else {
+      this.title = this.translate.instant('CREATE') + " " + this.translate.instant('PURCHASEORDER')
     }
 
   }
 
-  // calcTotal() {
-  //   let total = (+this.purchaseOrder.quantity * +this.purchaseOrder.unitPrice);
-  //   this.purchaseOrder.total = total + (total * (this.purchaseOrder.tax / 100)) - (this.purchaseOrder.discount);
-  // }
+  ionViewDidLoad() {
+    this.productComponent.isEnabled = false;
+    if (this.currentLang === 'en') {
+      this.productComponent.itemTextField = "nameEn"
+      this.productComponent.searchFailText = "No Products found."
+      this.productComponent.searchPlaceholder = "Enter Product name";
+    } else {
+      this.productComponent.itemTextField = "nameAr"
+      this.productComponent.searchFailText = "لم يتم العثور على منتجات"
+      this.productComponent.searchPlaceholder = "أدخل اسم المنتج";
+    }
+  }
+
+
+  calcTotal() {
+    this.purchaseOrder.total = 0;
+    this.selectedProducts.map(prod => {
+      this.purchaseOrder.total += +prod.price * +prod.quantity
+    })
+    this.purchaseOrder.grandTotal = +this.purchaseOrder.total +
+      +(+(+this.purchaseOrder.tax / 100) * +this.purchaseOrder.total) -
+      +this.purchaseOrder.discount;
+
+    this.purchaseOrder.total = +this.purchaseOrder.total.toFixed(2)
+    this.purchaseOrder.grandTotal = +this.purchaseOrder.grandTotal.toFixed(2);
+  }
 
   getPurchaseOrderByID(id: string) {
     this.purchaseOrderService.getPurchaseOrderByID(id)
@@ -57,14 +94,6 @@ export class PurchaseOrderDetailsPage {
         this.salesOrders = res;
       })
   }
-
-  // validateValues(id: string) {
-
-  //   const salesOrder = this.salesOrders.find(item => item._id === id);
-
-  //   this.isValid = this.purchaseOrder.quantity <= salesOrder.quantity ? true : false;
-    
-  // }
 
   savePurchaseOrder() {
     if (this.isValid) {
@@ -109,21 +138,28 @@ export class PurchaseOrderDetailsPage {
     }
   }
 
-  // changeValues(id: string) {
+  productChange(event: {
+    component: SelectSearchableComponent,
+    value: any
+  }) {
+    if (this.products.length > 0) {
+      let modal = this.modalCtrl.create(ConfigProductPage, { initProducts: this.selectedProducts, products: this.selectedProducts, fromPO: true })
+      modal.present();
 
-  //   if (!this.navArgs.get('PurchaseOrderID')) {
-  //     let salesOrder = this.salesOrders.find(item => item._id === id);
+      modal.onDidDismiss(products => {
+        if (products) {
+          this.products = products;
+          this.purchaseOrder.productObjects = products;
+        }
+      })
+    }
+  }
 
-  //     this.purchaseOrder.itemCode = salesOrder.itemCode;
-  //     this.purchaseOrder.itemName = salesOrder.itemName;
-  //     this.purchaseOrder.itemSubType = salesOrder.itemSubType;
-  //     this.purchaseOrder.itemType = salesOrder.itemType;
-  //     this.purchaseOrder.quantity = salesOrder.quantity;
-  //     this.purchaseOrder.unitPrice = salesOrder.unitPrice;
-  //   }
-
-
-  // }
+  changeValues(id: string) {
+    let salesOrder = this.salesOrders.find(item => item._id === id);
+    this.products = salesOrder.productObjects;
+    this.productComponent.isEnabled = true;
+  }
 
   closeModal() {
     this.viewCtrl.dismiss();

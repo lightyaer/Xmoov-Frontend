@@ -1,6 +1,6 @@
 <ion-header>
     <ion-navbar color="primary">
-        <ion-title class="centeredTitle">
+        <ion-title class="centeredText">
             {{title}}
         </ion-title>
         <ion-buttons end>
@@ -45,8 +45,18 @@
     <ion-item>
         <ion-label floating> {{'PRODUCT' | translate}}</ion-label>
         <select-searchable item-content [(ngModel)]="selectedProducts" [items]="products" itemValueField="_id"
-            itemTextField="nameEn" headerColor="primary" [canSearch]="true" [isMultiple]="true" (onSearch)="searchProducts($event)"
+            headerColor="primary" [focusSearchbar]="true" [canSearch]="true" [isMultiple]="true" (onSearch)="searchProducts($event)"
             (onChange)="productChange($event)">
+            <ng-template selectSearchableValueTemplate let-selectedProducts="value">
+                <div class="select-searchable-value-item" *ngFor="let product of selectedProducts">
+                    <div *ngIf="currentLang === 'en'">
+                        {{product.nameEn}} &nbsp; &nbsp; ({{product.quantity}})
+                    </div>
+                    <div *ngIf="currentLang === 'ar'">
+                        {{product.nameAr}} &nbsp; &nbsp; ({{product.quantity}})
+                    </div>
+                </div>
+            </ng-template>
         </select-searchable>
     </ion-item>
     <ion-item>

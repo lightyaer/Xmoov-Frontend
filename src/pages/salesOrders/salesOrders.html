@@ -22,11 +22,16 @@
 
             <ion-card-header>
                 <div *ngFor="let product of item.productObjects">
-                    {{product.nameEn}}
+                    <div *ngIf="currentLang == 'en'">
+                        {{product.nameEn}}
+                    </div>
+                    <div *ngIf="currentLang == 'ar'">
+                        {{product.nameAr}}
+                    </div>
                 </div>
             </ion-card-header>
 
-            <ion-row>
+            <ion-row class="centeredText">
                 <ion-col col-4>
                     <ion-label> {{'ORDERDATE' | translate}}</ion-label>
                     <ion-label>{{item.orderDate | date:'mediumDate'}}</ion-label>
