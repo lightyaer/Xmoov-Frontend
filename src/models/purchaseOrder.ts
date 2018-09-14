@@ -8,17 +8,12 @@ export class PurchaseOrder {
     total: number = 0;
     _author: string;
     _salesOrder: string;
-    productObjects: OrderProduct[];
+
     remarks: string;
     __v: number;
-    products: Product[];
+    productObjects: Product[];
     grandTotal: number = 0;
 
 }
 
-export class OrderProduct {
-    _id: string;
-    _product: string;
-    quantity: number;
-}
 

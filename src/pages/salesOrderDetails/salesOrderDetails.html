@@ -44,9 +44,9 @@
     </ion-item>
     <ion-item>
         <ion-label floating> {{'PRODUCT' | translate}}</ion-label>
-        <select-searchable item-content [(ngModel)]="selectedProducts" [items]="products" itemValueField="_id"
-            headerColor="primary" [focusSearchbar]="true" [canSearch]="true" [isMultiple]="true" (onSearch)="searchProducts($event)"
-            (onChange)="productChange($event)">
+        <select-searchable #productComponent item-content [(ngModel)]="selectedProducts" [items]="products"
+            itemValueField="_id" itemTextField="nameEn" headerColor="primary" [focusSearchbar]="true" [canSearch]="true"
+            [isMultiple]="true" (onSearch)="searchProducts($event)" (onChange)="productChange($event)">
             <ng-template selectSearchableValueTemplate let-selectedProducts="value">
                 <div class="select-searchable-value-item" *ngFor="let product of selectedProducts">
                     <div *ngIf="currentLang === 'en'">

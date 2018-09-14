@@ -26,6 +26,7 @@ export class PurchaseOrderDetailsPage {
   orderStatus: OrderStatus = new OrderStatus();
   selectedProducts: Product[];
   salesOrders: SalesOrder[];
+  selectedSalesOrder: SalesOrder;
   products: Product[];
   currentLang: string;
   @ViewChild('productComponent') productComponent: SelectSearchableComponent;
@@ -42,7 +43,6 @@ export class PurchaseOrderDetailsPage {
 
   ) {
     this.currentLang = this.translate.getDefaultLang();
-
     this.purchaseOrder._id = this.navArgs.get('PurchaseOrderID');
     this.getAllSalesOrders();
     if (this.purchaseOrder._id) {
@@ -55,7 +55,8 @@ export class PurchaseOrderDetailsPage {
   }
 
   ionViewDidLoad() {
-    this.productComponent.isEnabled = false;
+
+    this.productComponent.isEnabled = this.navArgs.get('PurchaseOrderID') ? true : false;
     if (this.currentLang === 'en') {
       this.productComponent.itemTextField = "nameEn"
       this.productComponent.searchFailText = "No Products found."
@@ -66,7 +67,6 @@ export class PurchaseOrderDetailsPage {
       this.productComponent.searchPlaceholder = "أدخل اسم المنتج";
     }
   }
-
 
   calcTotal() {
     this.purchaseOrder.total = 0;
@@ -85,6 +85,8 @@ export class PurchaseOrderDetailsPage {
     this.purchaseOrderService.getPurchaseOrderByID(id)
       .then((res: PurchaseOrder) => {
         this.purchaseOrder = res;
+        this.products = this.purchaseOrder.productObjects;
+        this.selectedProducts = this.purchaseOrder.productObjects;
       })
   }
 
@@ -143,7 +145,7 @@ export class PurchaseOrderDetailsPage {
     value: any
   }) {
     if (this.products.length > 0) {
-      let modal = this.modalCtrl.create(ConfigProductPage, { initProducts: this.selectedProducts, products: this.selectedProducts, fromPO: true })
+      let modal = this.modalCtrl.create(ConfigProductPage, { salesOrder: this.selectedSalesOrder, products: this.selectedProducts, fromPO: true })
       modal.present();
 
       modal.onDidDismiss(products => {
@@ -157,6 +159,7 @@ export class PurchaseOrderDetailsPage {
 
   changeValues(id: string) {
     let salesOrder = this.salesOrders.find(item => item._id === id);
+    this.selectedSalesOrder = salesOrder;
     this.products = salesOrder.productObjects;
     this.productComponent.isEnabled = true;
   }

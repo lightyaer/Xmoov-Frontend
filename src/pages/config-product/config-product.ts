@@ -3,6 +3,8 @@ import { NavController, NavParams, AlertController } from 'ionic-angular';
 import { Product } from '../../models/product';
 import { TranslateService } from '@ngx-translate/core';
 import { ViewController } from 'ionic-angular/navigation/view-controller';
+import { SalesOrder } from '../../models/salesOrder';
+import { SalesOrderProvider } from '../../services/salesOrder.service';
 
 @Component({
   selector: 'page-config-product',
@@ -11,6 +13,8 @@ import { ViewController } from 'ionic-angular/navigation/view-controller';
 export class ConfigProductPage {
   products: Product[];
   quantities: number[] = [];
+  quantitiesRemainder: number[] = [];
+  salesOrder: SalesOrder;
   alertProducts = [];
   lang: string;
   fromPurchaseOrder: boolean = false;
@@ -18,11 +22,16 @@ export class ConfigProductPage {
     public navParams: NavParams,
     private translate: TranslateService,
     private viewCtrl: ViewController,
-    private alertCtrl: AlertController
+    private alertCtrl: AlertController,
+    private salesOrderService: SalesOrderProvider
   ) {
 
     this.fromPurchaseOrder = this.navParams.get('fromPO');
     this.lang = this.translate.getDefaultLang();
+    this.salesOrder = this.navParams.get("salesOrder");
+    this.salesOrderService.getSalesOrderByID(this.salesOrder._id).then((res: SalesOrder) => {
+      this.salesOrder = res;
+    });
     this.products = this.navParams.get('products');
     this.products.map(item => {
       this.quantities.push(item.quantity);

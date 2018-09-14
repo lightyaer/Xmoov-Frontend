@@ -39,7 +39,7 @@ export class PurchaseOrdersPage {
 
 
     gotoAddPurchaseOrderPage() {
-        let modal = this.modalCtrl.create(PurchaseOrderDetailsPage, { Title: "Add Purchase Order" });
+        let modal = this.modalCtrl.create(PurchaseOrderDetailsPage);
         modal.present();
 
         modal.onDidDismiss(() => {
@@ -48,7 +48,7 @@ export class PurchaseOrdersPage {
     }
 
     gotoEditPurchaseOrderPage(id: string) {
-        let modal = this.modalCtrl.create(PurchaseOrderDetailsPage, { PurchaseOrderID: id, Title: "Edit Purchase Order" })
+        let modal = this.modalCtrl.create(PurchaseOrderDetailsPage, { PurchaseOrderID: id })
         modal.present();
 
         modal.onDidDismiss(() => {

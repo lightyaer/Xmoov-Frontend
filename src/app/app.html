@@ -1,19 +1,21 @@
 <ion-menu [content]="mycontent">
     <ion-content>
 
-        <ion-item>
+        <ion-item color="light">
             {{driver.name}}
             <br>
             <br> {{driver.vehicleRegNo}}
         </ion-item>
-        <ion-item>
-            <h2 (tap)="home()">
-                <ion-icon name="home"></ion-icon> Home</h2>
-        </ion-item>
-        <ion-item>
+        <ion-item (tap)="home()">
 
-            <h2 (tap)="settings()">
-                <ion-icon name="settings"></ion-icon> Settings</h2>
+            <ion-icon name="home"></ion-icon> &nbsp; Home
+
+        </ion-item>
+        <ion-item (tap)="settings()">
+
+
+            <ion-icon name="settings"></ion-icon> &nbsp; Settings
+
         </ion-item>
 
 

@@ -21,6 +21,8 @@ import { ConfigProductPage } from '../config-product/config-product';
 })
 export class SalesOrderDetailsPage {
 
+    @ViewChild('productComponent') productComponent: SelectSearchableComponent;
+
     title: String;
     loader: any;
     salesOrder: SalesOrder = new SalesOrder();
@@ -29,8 +31,6 @@ export class SalesOrderDetailsPage {
     products: Product[];
     selectedProducts: Product[];
     currentLang: string;
-
-    @ViewChild('productComponent') productComponent: SelectSearchableComponent;
 
     constructor(public navCtrl: NavController,
         private viewCtrl: ViewController,
@@ -59,12 +59,12 @@ export class SalesOrderDetailsPage {
 
     ionViewDidLoad() {
         if (this.currentLang === 'en') {
-            this.productComponent.itemTextField = "nameEn"
-            this.productComponent.searchFailText = "No Products found."
+            this.productComponent.itemTextField = "nameEn";
+            this.productComponent.searchFailText = "No Products found.";
             this.productComponent.searchPlaceholder = "Enter Product name";
         } else {
-            this.productComponent.itemTextField = "nameAr"
-            this.productComponent.searchFailText = "لم يتم العثور على منتجات"
+            this.productComponent.itemTextField = "nameAr";
+            this.productComponent.searchFailText = "لم يتم العثور على منتجات";
             this.productComponent.searchPlaceholder = "أدخل اسم المنتج";
         }
     }
@@ -86,8 +86,6 @@ export class SalesOrderDetailsPage {
     }
 
     calcTotal() {
-
-
         this.salesOrder.total = 0;
         this.salesOrder.productObjects.map(item => {
             this.salesOrder.total += +item.price * item.quantity;
