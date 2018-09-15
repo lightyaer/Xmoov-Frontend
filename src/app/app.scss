@@ -39,6 +39,11 @@
     color: #424242;
 }
 
+.noRecords {
+    text-align: center;
+    margin: 15px auto;
+}
+
 .centeredText {
     text-align: center;
 }
@@ -68,6 +73,7 @@
     margin-bottom: 0px;
     position: fixed;
     bottom: 0px;
+    height: 4.6rem;
 }
 
 .pl-18{

@@ -16,45 +16,54 @@
 </ion-header>
 <ion-content>
 
-    <ion-list>
-        <!--  -->
-        <ion-card *ngFor="let item of salesOrders" (tap)="gotoEditSalesOrder(item._id)" (press)="deleteSalesOrder(item._id)">
+    <div class="noRecords" *ngIf="salesOrders?.length == 0">
+        <span>
+            <ion-icon ios="ios-sad" md="md-sad"></ion-icon> No records found
+        </span>
+    </div>
 
-            <ion-card-header>
-                <div *ngFor="let product of item.productObjects">
-                    <div *ngIf="currentLang == 'en'">
-                        {{product.nameEn}}
+    <div *ngIf="salesOrders?.length > 0">
+
+        <ion-list>
+
+            <ion-card *ngFor="let item of salesOrders" (tap)="gotoEditSalesOrder(item._id)" (press)="deleteSalesOrder(item._id)">
+
+                <ion-card-header>
+                    <div *ngFor="let product of item.productObjects">
+                        <div *ngIf="currentLang == 'en'">
+                            {{product.nameEn}}
+                        </div>
+                        <div *ngIf="currentLang == 'ar'">
+                            {{product.nameAr}}
+                        </div>
                     </div>
-                    <div *ngIf="currentLang == 'ar'">
-                        {{product.nameAr}}
-                    </div>
-                </div>
-            </ion-card-header>
+                </ion-card-header>
 
-            <ion-row class="centeredText">
-                <ion-col col-4>
-                    <ion-label> {{'ORDERDATE' | translate}}</ion-label>
-                    <ion-label>{{item.orderDate | date:'mediumDate'}}</ion-label>
+                <ion-row class="centeredText">
+                    <ion-col col-4>
+                        <ion-label> {{'ORDERDATE' | translate}}</ion-label>
+                        <ion-label>{{item.orderDate | date:'mediumDate'}}</ion-label>
 
-                </ion-col>
+                    </ion-col>
 
-                <ion-col col-4>
-                    <ion-label> {{'TOTAL' | translate}}</ion-label>
-                    <ion-label> {{item.total}}</ion-label>
+                    <ion-col col-4>
+                        <ion-label> {{'TOTAL' | translate}}</ion-label>
+                        <ion-label> {{item.total}}</ion-label>
 
-                </ion-col>
-                <ion-col col-4>
-                    <ion-label> {{'GRANDTOTAL' | translate}}</ion-label>
-                    <ion-label> {{item.grandTotal}}</ion-label>
+                    </ion-col>
+                    <ion-col col-4>
+                        <ion-label> {{'GRANDTOTAL' | translate}}</ion-label>
+                        <ion-label> {{item.grandTotal}}</ion-label>
 
-                </ion-col>
-            </ion-row>
+                    </ion-col>
+                </ion-row>
 
 
 
-        </ion-card>
-    </ion-list>
+            </ion-card>
+        </ion-list>
 
+    </div>
     <ion-fab bottom right>
         <button ion-fab (tap)="gotoAddSalesOrderPage()">
             <ion-icon name="add"></ion-icon>

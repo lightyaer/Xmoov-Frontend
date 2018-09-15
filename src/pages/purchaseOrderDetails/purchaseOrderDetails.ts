@@ -145,11 +145,12 @@ export class PurchaseOrderDetailsPage {
     value: any
   }) {
     if (this.products.length > 0) {
-      let modal = this.modalCtrl.create(ConfigProductPage, { salesOrder: this.selectedSalesOrder, products: this.selectedProducts, fromPO: true })
+      let modal = this.modalCtrl.create(ConfigProductPage, { salesOrder_id: this.selectedSalesOrder._id, products: this.selectedProducts, fromPO: true })
       modal.present();
 
       modal.onDidDismiss(products => {
         if (products) {
+          console.log(products);
           this.products = products;
           this.purchaseOrder.productObjects = products;
         }

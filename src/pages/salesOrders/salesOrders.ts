@@ -27,7 +27,6 @@ export class SalesOrdersPage {
     private modalCtrl: ModalController,
     private translate: TranslateService
   ) {
-
     this.currentLang = this.translate.getDefaultLang();
     this.getAllSalesOrders();
   }

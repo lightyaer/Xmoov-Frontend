@@ -15,41 +15,48 @@
 
 </ion-header>
 <ion-content>
-    <ion-list>
-        <ion-card *ngFor="let item of purchaseOrders" (press)="deletePurchaseOrder(item._id)" (tap)="gotoEditPurchaseOrderPage(item._id)">
 
-            <ion-card-header>
-                <div *ngFor="let product of item.productObjects">
-                    <div *ngIf="currentLang == 'en'">
-                        {{product.nameEn}} &nbsp;&nbsp; ({{product.quantity}})
+    <div class="noRecords" *ngIf="purchaseOrders?.length == 0">
+        <span>
+            <ion-icon ios="ios-sad" md="md-sad"></ion-icon> No records found
+        </span>
+    </div>
+
+    <div *ngIf="purchaseOrders?.length > 0">
+        <ion-list>
+            <ion-card *ngFor="let item of purchaseOrders" (press)="deletePurchaseOrder(item._id)" (tap)="gotoEditPurchaseOrderPage(item._id)">
+
+                <ion-card-header>
+                    <div *ngFor="let product of item.productObjects">
+                        <div *ngIf="currentLang == 'en'">
+                            {{product.nameEn}} &nbsp;&nbsp; ({{product.quantity}})
+                        </div>
+                        <div *ngIf="currentLang == 'ar'">
+                            {{product.nameAr}} &nbsp;&nbsp; ({{product.quantity}})
+                        </div>
                     </div>
-                    <div *ngIf="currentLang == 'ar'">
-                        {{product.nameAr}} &nbsp;&nbsp; ({{product.quantity}})
-                    </div>
-                </div>
-            </ion-card-header>
-            <ion-row class="centeredText">
-                <ion-col col-3>
-                    <ion-label> {{'DISCOUNT' | translate}}</ion-label>
-                    <ion-label> {{item.discount}}</ion-label>
-                </ion-col>
-                <ion-col col-3>
-                    <ion-label> {{'TAX' | translate}}</ion-label>
-                    <ion-label> {{item.tax}}</ion-label>
-                </ion-col>
-                <ion-col col-3>
-                    <ion-label> {{'TOTAL' | translate}}</ion-label>
-                    <ion-label> {{item.total}}</ion-label>
-                </ion-col>
-                <ion-col col-3>
-                    <ion-label> {{'GRANDTOTAL' | translate}}</ion-label>
-                    <ion-label> {{item.grandTotal}}</ion-label>
-                </ion-col>
-            </ion-row>
-        </ion-card>
-    </ion-list>
-
-
+                </ion-card-header>
+                <ion-row class="centeredText">
+                    <ion-col col-3>
+                        <ion-label> {{'DISCOUNT' | translate}}</ion-label>
+                        <ion-label> {{item.discount}}</ion-label>
+                    </ion-col>
+                    <ion-col col-3>
+                        <ion-label> {{'TAX' | translate}}</ion-label>
+                        <ion-label> {{item.tax}}</ion-label>
+                    </ion-col>
+                    <ion-col col-3>
+                        <ion-label> {{'TOTAL' | translate}}</ion-label>
+                        <ion-label> {{item.total}}</ion-label>
+                    </ion-col>
+                    <ion-col col-3>
+                        <ion-label> {{'GRANDTOTAL' | translate}}</ion-label>
+                        <ion-label> {{item.grandTotal}}</ion-label>
+                    </ion-col>
+                </ion-row>
+            </ion-card>
+        </ion-list>
+    </div>
     <ion-fab bottom right>
         <button ion-fab (tap)="gotoAddPurchaseOrderPage()">
             <ion-icon name="add"></ion-icon>

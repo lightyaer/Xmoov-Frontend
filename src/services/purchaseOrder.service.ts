@@ -101,4 +101,19 @@ export class PurchaseOrderProvider {
             })
         })
     }
+
+    getRemainderQuantities(salesOrder_id: string) {
+        let headers = new HttpHeaders({
+            'Content-type': 'application/json',
+            'x-auth': localStorage.getItem('token')
+        })
+
+        return new Promise((resolve, reject) => {
+            this.http.get(this.localUrl + 'purchaseorders/getQuantities/' + salesOrder_id, { headers: headers }).subscribe(res => {
+                resolve(res);
+            }, (error) => {
+                reject(error)
+            })
+        })
+    }
 }

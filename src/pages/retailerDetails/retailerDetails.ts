@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, ViewController, NavParams, ToastController, AlertController } from 'ionic-angular';
 import { RetailerProvider } from '../../services/retailer.service';
 import { Retailer } from '../../models/retailer';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
     selector: 'page-retailerDetails',
@@ -16,12 +17,16 @@ export class RetailerDetailsPage {
         public viewCtrl: ViewController,
         public navArgs: NavParams,
         public toastCtrl: ToastController,
-        public alertCtrl: AlertController
+        public alertCtrl: AlertController,
+        private translate: TranslateService
     ) {
-        this.title = this.navArgs.data.title;
+
         if (this.navArgs.data.id) {
+            this.title = this.translate.instant('EDIT') + " " + this.translate.instant('RETAILER');
             this.retailer._id = this.navArgs.data.id;
             this.getRetailerDetailsByID(this.retailer._id);
+        } else {
+            this.title = this.translate.instant('CREATE') + " " + this.translate.instant('RETAILER');
         }
     }
 
@@ -37,8 +42,8 @@ export class RetailerDetailsPage {
 
 
     saveRetailer() {
+
         if (!this.navArgs.data.id) {
-            console.log('Adding Retailer')
             this.retailerService.saveRetailer(this.retailer).then((res) => {
                 let toast = this.toastCtrl.create({
                     message: 'Retailer Added Successfully',
@@ -57,7 +62,6 @@ export class RetailerDetailsPage {
                     alert.present();
                 })
         } else {
-            console.log('Editing Retailer')
             this.retailerService.updateRetailerbyID(this.retailer).then((res) => {
                 let toast = this.toastCtrl.create({
                     message: 'Retailer Added Successfully',

@@ -1,7 +1,8 @@
 <ion-header>
 
 
-    <ion-searchbar [(ngModel)]="filters.name" [showCancelButton]="shouldShowCancel" (ionInput)="getAllRetailers()" (ionCancel)="getAllRetailers()">
+    <ion-searchbar [(ngModel)]="filters.name" [showCancelButton]="shouldShowCancel" (ionInput)="getAllRetailers()"
+        (ionCancel)="getAllRetailers()">
     </ion-searchbar>
 
 
@@ -9,33 +10,40 @@
 
 <ion-content>
 
-    <ion-list>
-        <ion-card *ngFor="let item of retailers" (press)="deleteRetailer(item._id)" (tap)="gotoEditRetailer(item._id)">
+    <div class="noRecords" *ngIf="retailers?.length == 0">
+        <span >
+            <ion-icon ios="ios-sad" md="md-sad"></ion-icon> No records found
+        </span>
+    </div>
 
-            <ion-card-header>
-                {{item.name}}
-            </ion-card-header>
-            <ion-row>
+    <div *ngIf="retailers?.length > 0">
+        <ion-list>
+            <ion-card *ngFor="let item of retailers" (press)="deleteRetailer(item._id)" (tap)="gotoEditRetailer(item._id)">
 
-                <ion-col class="pl-18" col-12>
-                    {{item.address}}
-                </ion-col>
+                <ion-card-header>
+                    {{item.name}}
+                </ion-card-header>
+                <ion-row>
 
-                <ion-col class="pl-18">
-                    {{item.phoneNo}}
-                </ion-col>
-                <ion-col>
-                    {{item.email}}
-                </ion-col>
+                    <ion-col class="pl-18" col-12>
+                        {{item.address}}
+                    </ion-col>
 
-            </ion-row>
+                    <ion-col class="pl-18">
+                        {{item.phoneNo}}
+                    </ion-col>
+                    <ion-col>
+                        {{item.email}}
+                    </ion-col>
+
+                </ion-row>
 
 
 
 
-        </ion-card>
-    </ion-list>
-
+            </ion-card>
+        </ion-list>
+    </div>
     <ion-fab bottom right>
         <button ion-fab (click)="gotoAddRetailerPage()">
             <ion-icon name="add"></ion-icon>

@@ -3,8 +3,8 @@ import { NavController, NavParams, AlertController } from 'ionic-angular';
 import { Product } from '../../models/product';
 import { TranslateService } from '@ngx-translate/core';
 import { ViewController } from 'ionic-angular/navigation/view-controller';
-import { SalesOrder } from '../../models/salesOrder';
-import { SalesOrderProvider } from '../../services/salesOrder.service';
+import { PurchaseOrderProvider } from '../../services/purchaseOrder.service';
+import { Quantities } from '../../models/purchaseOrder';
 
 @Component({
   selector: 'page-config-product',
@@ -13,8 +13,8 @@ import { SalesOrderProvider } from '../../services/salesOrder.service';
 export class ConfigProductPage {
   products: Product[];
   quantities: number[] = [];
-  quantitiesRemainder: number[] = [];
-  salesOrder: SalesOrder;
+  quantitiesRemainder: Quantities[];
+  salesOrder_id: string;
   alertProducts = [];
   lang: string;
   fromPurchaseOrder: boolean = false;
@@ -23,29 +23,53 @@ export class ConfigProductPage {
     private translate: TranslateService,
     private viewCtrl: ViewController,
     private alertCtrl: AlertController,
-    private salesOrderService: SalesOrderProvider
+    private purchaseOrderService: PurchaseOrderProvider
   ) {
 
     this.fromPurchaseOrder = this.navParams.get('fromPO');
     this.lang = this.translate.getDefaultLang();
-    this.salesOrder = this.navParams.get("salesOrder");
-    this.salesOrderService.getSalesOrderByID(this.salesOrder._id).then((res: SalesOrder) => {
-      this.salesOrder = res;
-    });
+    this.salesOrder_id = this.navParams.get('salesOrder_id');
     this.products = this.navParams.get('products');
-    this.products.map(item => {
-      this.quantities.push(item.quantity);
-    })
+    this.setQuantities();
+  }
+
+
+  async setQuantities() {
+    if (this.fromPurchaseOrder) {
+      this.quantitiesRemainder = await this.purchaseOrderService.getRemainderQuantities(this.salesOrder_id) as Quantities[];
+      console.log(this.quantitiesRemainder);
+      console.log(this.products);
+      if (this.quantitiesRemainder.length > 0) {
+        this.products.map(prod => {
+          let quant: Quantities = this.quantitiesRemainder.find(item => item._product === prod._id);
+          quant = quant ? quant : { quantity: prod.quantity, _product: prod._id, _id: '0' }
+          prod.quantity = quant.quantity;
+          this.quantities.push(quant.quantity);
+        })
+      } else {
+        this.products.map(item => {
+          this.quantities.push(item.quantity);
+        });
+      }
+
+      console.log(this.quantities);
+    }
   }
 
   dismiss() {
-    if (this.validate())
+    if (this.validate()) {
+      this.products = this.products.filter(prod => prod.quantity > 0);
       this.viewCtrl.dismiss(this.products);
+
+    }
+
   }
 
   validate() {
     if (this.fromPurchaseOrder) {
+      this.alertProducts = [];
       for (let i = 0; i < this.products.length; i++) {
+        console.log(this.products[i].quantity, this.quantities[i]);
         if (this.products[i].quantity > this.quantities[i]) {
           this.products[i].quantity = this.quantities[i];
           this.alertProducts.push({ nameEn: this.products[i].nameEn, nameAr: this.products[i].nameAr })

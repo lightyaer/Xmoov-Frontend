@@ -16,10 +16,12 @@ export class RetailersPage {
     filters: RetailerFilters = new RetailerFilters();
     constructor(public navCtrl: NavController,
         private retailerService: RetailerProvider,
-        public modalCtrl: ModalController,
-        public alertCtrl: AlertController,
-        public toastCtrl: ToastController) {
+        private modalCtrl: ModalController,
+        private alertCtrl: AlertController,
+        private toastCtrl: ToastController
+    ) {
         this.getAllRetailers();
+
     }
 
     getAllRetailers() {
@@ -29,12 +31,12 @@ export class RetailersPage {
     }
 
     gotoAddRetailerPage() {
-        let modal = this.modalCtrl.create(RetailerDetailsPage, { title: 'Add Retailer' });
+        let modal = this.modalCtrl.create(RetailerDetailsPage);
         modal.present();
     }
 
     gotoEditRetailer(id: String) {
-        let modal = this.modalCtrl.create(RetailerDetailsPage, { title: 'Edit Retailer', id: id });
+        let modal = this.modalCtrl.create(RetailerDetailsPage, { id: id });
         modal.present();
     }
 

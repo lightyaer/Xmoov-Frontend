@@ -38,6 +38,10 @@
         </ion-select>
     </ion-item>
     <ion-item>
+        <ion-label floating>{{'REMARKS' | translate}}</ion-label>
+        <ion-input [ngModel]="salesOrder.remarks" (ngModelChange)="salesOrder.remarks=$event" type="text"></ion-input>
+    </ion-item>
+    <ion-item>
         <ion-label floating>{{'ORDERDATE' | translate}}</ion-label>
         <ion-datetime min="2016" max="2020-10-31" [ngModel]="salesOrder.orderDate" (ngModelChange)="salesOrder.orderDate=$event"
             type="text "></ion-datetime>

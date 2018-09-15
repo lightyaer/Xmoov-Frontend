@@ -154,10 +154,9 @@ export class SalesOrderDetailsPage {
     }
 
     saveSalesOrder() {
+
         this.salesOrder.orderStatus = this.orderStatus;
-
         this.salesOrder.orderDate = new Date(this.salesOrder.orderDate).getTime().toString();
-
         if (!this.navArgs.data.id) {
             this.salesOrderService.saveSalesOrder(this.salesOrder).then((res) => {
                 let toast = this.toastCtrl.create({
