@@ -22,10 +22,10 @@ export class HomeTabsPage {
     constructor(public navCtrl: NavController,
         private navArgs: NavParams,
         private menuCtrl: MenuController,
-        private events: Events,
-        private translate: TranslateService
+        private translate: TranslateService,
+        private events: Events
     ) {
-        this.title = this.translate.instant('SALESORDER');
+
         this.currentLang = this.translate.getDefaultLang();
         this.menuCtrl.enable(true);
         this.navData = this.navArgs.data;
@@ -33,8 +33,14 @@ export class HomeTabsPage {
 
     }
 
+    ionViewDidLoad() {
+
+        this.translate.get('SALESORDER').subscribe(res => {
+            this.title = res;
+        })
+    }
+
     onTabSelect(ev: any) {
-        console.log('Tab selected', 'Index: ' + ev.index, 'Unique ID: ' + ev.id);
         switch (ev.index) {
             case 0:
                 this.title = this.translate.instant('PURCHASEORDER');

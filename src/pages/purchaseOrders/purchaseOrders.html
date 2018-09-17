@@ -27,13 +27,20 @@
             <ion-card *ngFor="let item of purchaseOrders" (press)="deletePurchaseOrder(item._id)" (tap)="gotoEditPurchaseOrderPage(item._id)">
 
                 <ion-card-header>
-                    <div *ngFor="let product of item.productObjects">
-                        <div *ngIf="currentLang == 'en'">
-                            {{product.nameEn}} &nbsp;&nbsp; ({{product.quantity}})
-                        </div>
-                        <div *ngIf="currentLang == 'ar'">
-                            {{product.nameAr}} &nbsp;&nbsp; ({{product.quantity}})
-                        </div>
+                    <div *ngFor="let product of item.products">
+                        <ion-row>
+                            <ion-col col-11>
+                                <div *ngIf="currentLang == 'en'">
+                                    {{product.nameEn}}
+                                </div>
+                                <div *ngIf="currentLang == 'ar'">
+                                    {{product.nameAr}}
+                                </div>
+                            </ion-col>
+                            <ion-col col-1>
+                                ({{product.quantity}})
+                            </ion-col>
+                        </ion-row>
                     </div>
                 </ion-card-header>
                 <ion-row class="centeredText">

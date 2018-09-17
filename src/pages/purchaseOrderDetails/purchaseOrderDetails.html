@@ -1,6 +1,6 @@
 <ion-header>
     <ion-navbar color="primary">
-        <ion-title class="centeredText">
+        <ion-title>
             {{title}}
         </ion-title>
         <ion-buttons end>
@@ -59,13 +59,13 @@
         <ion-input [ngModel]="purchaseOrder.discount" (ngModelChange)="purchaseOrder.discount=$event" type="number"
             (ngModelChange)="calcTotal()"></ion-input>
     </ion-item>
-    <ion-item style="margin-bottom: 55px">
+    <ion-item>
         <ion-label floating>{{'GRANDTOTAL' | translate}}</ion-label>
         <ion-input readonly="true" [ngModel]="purchaseOrder.grandTotal" (ngModelChange)="purchaseOrder.grandTotal=$event"
             type="number" (ngModelChange)="calcTotal()"></ion-input>
     </ion-item>
 
 </ion-content>
-<div position="bottom">
-    <button *ngIf="isValid" ion-button block class="buttonItem bottomButton" color="primary" (click)="savePurchaseOrder()">Submit</button>
-</div>
+<ion-footer>
+    <button ion-button block class="bottomButton" color="primary" (click)="savePurchaseOrder()">Submit</button>
+</ion-footer>

@@ -20,7 +20,6 @@ import { ConfigProductPage } from '../config-product/config-product';
 export class PurchaseOrderDetailsPage {
 
   title: string;
-  isValid: boolean = true;
   purchaseOrder: PurchaseOrder = new PurchaseOrder();
   salesOrderFilters: SalesOrderFilters = new SalesOrderFilters();
   orderStatus: OrderStatus = new OrderStatus();
@@ -85,8 +84,8 @@ export class PurchaseOrderDetailsPage {
     this.purchaseOrderService.getPurchaseOrderByID(id)
       .then((res: PurchaseOrder) => {
         this.purchaseOrder = res;
-        this.products = this.purchaseOrder.productObjects;
-        this.selectedProducts = this.purchaseOrder.productObjects;
+        this.products = this.purchaseOrder.products;
+        this.selectedProducts = this.purchaseOrder.products;
       })
   }
 
@@ -98,45 +97,57 @@ export class PurchaseOrderDetailsPage {
   }
 
   savePurchaseOrder() {
-    if (this.isValid) {
-      if (!this.navArgs.get('PurchaseOrderID')) {
-        this.purchaseOrderService.savePurchaseOrder(this.purchaseOrder).then((res) => {
-          let toast = this.toastCtrl.create({
-            message: 'Purchase Order Added Successfully',
-            duration: 3000
-          });
-          if (res) {
-            toast.present();
+    if (!this.navArgs.get('PurchaseOrderID')) {
+      this.purchaseOrderService.savePurchaseOrder(this.purchaseOrder).then((res) => {
+        let toast = this.toastCtrl.create({
+          message: 'Purchase Order Added Successfully',
+          duration: 3000
+        });
+        if (res) {
+          toast.present();
+        }
+        this.viewCtrl.dismiss();
+      })
+        .catch((err) => {
+          let message = "<ul>"
+          for (let text of err) {
+            if (text) {
+              message += "<li>" + text + "</li>";
+            }
           }
-          this.viewCtrl.dismiss();
-        })
-          .catch((err) => {
-            let alert = this.alertCtrl.create({
-              title: 'Error',
-              subTitle: err.message,
-              buttons: ['Ok']
-            })
-            alert.present();
+          message += "</ul>"
+          let alert = this.alertCtrl.create({
+            title: 'Error',
+            subTitle: message,
+            buttons: ['Ok']
           })
-      } else {
-        this.purchaseOrderService.updatePurchaseOrderByID(this.purchaseOrder).then((res) => {
-          let toast = this.toastCtrl.create({
-            message: 'Purchase Order Saved Successfully',
-            duration: 3000
-          });
-          if (res) {
-            toast.present();
+          alert.present();
+        })
+    } else {
+      this.purchaseOrderService.updatePurchaseOrderByID(this.purchaseOrder).then((res) => {
+        let toast = this.toastCtrl.create({
+          message: 'Purchase Order Saved Successfully',
+          duration: 3000
+        });
+        if (res) {
+          toast.present();
+        }
+      })
+        .catch((err) => {
+          let message = "<ul>"
+          for (let text of err) {
+            if (text) {
+              message += "<li>" + text + "</li>";
+            }
           }
-        })
-          .catch((err) => {
-            let alert = this.alertCtrl.create({
-              title: 'Error',
-              subTitle: err.message,
-              buttons: ['Ok']
-            })
-            alert.present();
+          message += "</ul>"
+          let alert = this.alertCtrl.create({
+            title: 'Error',
+            subTitle: message,
+            buttons: ['Ok']
           })
-      }
+          alert.present();
+        })
     }
   }
 
@@ -150,9 +161,10 @@ export class PurchaseOrderDetailsPage {
 
       modal.onDidDismiss(products => {
         if (products) {
-          console.log(products);
+
           this.products = products;
-          this.purchaseOrder.productObjects = products;
+          this.calcTotal();
+          this.purchaseOrder.products = products;
         }
       })
     }
@@ -161,7 +173,7 @@ export class PurchaseOrderDetailsPage {
   changeValues(id: string) {
     let salesOrder = this.salesOrders.find(item => item._id === id);
     this.selectedSalesOrder = salesOrder;
-    this.products = salesOrder.productObjects;
+    this.products = salesOrder.products;
     this.productComponent.isEnabled = true;
   }
 

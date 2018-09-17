@@ -15,7 +15,7 @@ export function createTranslateLoader(http: HttpClient) {
 }
 
 
-import { LoginProvider } from '../services/driver.service';
+import { DriverProvider } from '../services/driver.service';
 import { RetailerProvider } from '../services/retailer.service';
 import { SalesOrderProvider } from '../services/salesOrder.service';
 
@@ -36,6 +36,7 @@ import { PurchaseOrderDetailsPage } from '../pages/purchaseOrderDetails/purchase
 import { PurchaseOrderProvider } from '../services/purchaseOrder.service';
 import { ProductProvider } from '../services/product.service';
 import { ConfigProductPage } from '../pages/config-product/config-product';
+import { ConfigProvider } from '../services/config.service';
 
 
 let pages = [
@@ -81,11 +82,12 @@ let pages = [
     StatusBar,
     SplashScreen,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
-    LoginProvider,
+    DriverProvider,
     RetailerProvider,
     SalesOrderProvider,
     ProductProvider,
-    PurchaseOrderProvider
+    PurchaseOrderProvider,
+    ConfigProvider
   ]
 })
 export class AppModule { }

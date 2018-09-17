@@ -1,6 +1,6 @@
 <ion-header>
     <ion-navbar color="primary">
-        <ion-title class="centeredText">
+        <ion-title>
             {{title}}
         </ion-title>
         <ion-buttons end>
@@ -62,12 +62,12 @@
             <ion-label floating>{{'SHIPPHONE' | translate}}</ion-label>
             <ion-input [ngModel]="retailer.shipPhoneNo" (ngModelChange)="retailer.shipPhoneNo=$event" type="tel"></ion-input>
         </ion-item>
-        <ion-item class="margin-b55">
+        <ion-item>
             <ion-label floating> {{'SHIPEMAIL' | translate}}</ion-label>
             <ion-input [ngModel]="retailer.shipEmail" (ngModelChange)="retailer.shipEmail=$event" type="email"></ion-input>
         </ion-item>
     </div>
 </ion-content>
-<div position="bottom">
-    <button ion-button block class="buttonItem bottomButton" color="primary" (click)="saveRetailer()">Submit</button>
-</div>
+<ion-footer>
+    <button ion-button block class="bottomButton" color="primary" (click)="saveRetailer()">Submit</button>
+</ion-footer>

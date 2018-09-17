@@ -1,22 +1,17 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import 'rxjs/add/operator/map';
-
 
 @Injectable()
 export class ProductProvider {
 
-    localUrl: string;
-    productionUrl: string;
     constructor(public http: HttpClient) {
-        // this.localUrl = 'https://xmoov.herokuapp.com/';
-        this.localUrl = 'http://localhost:3000/';
+
     }
 
     getAllProducts(search: string, lang: string) {
         let httpParams = new HttpParams()
             .set('name', search)
-            .set('lang', 'en');
+            .set('lang', lang);
 
         let httpOptions = {
             headers: new HttpHeaders({
@@ -27,10 +22,10 @@ export class ProductProvider {
         };
 
         return new Promise((resolve, reject) => {
-            this.http.get(this.localUrl + 'products/all', httpOptions).subscribe(res => {
+            this.http.get(localStorage.getItem('api_endpoint') + 'products/all', httpOptions).subscribe(res => {
                 resolve(res);
             }, (error) => {
-                reject(error)
+                reject(error.error.message.split(','))
             })
         })
     }
@@ -46,10 +41,10 @@ export class ProductProvider {
         };
 
         return new Promise((resolve, reject) => {
-            this.http.get(this.localUrl + 'products/ids', httpOptions).subscribe(res => {
+            this.http.get(localStorage.getItem('api_endpoint') + 'products/ids', httpOptions).subscribe(res => {
                 resolve(res);
             }, (error) => {
-                reject(error)
+                reject(error.error.message.split(','))
             })
         })
     }
@@ -64,10 +59,10 @@ export class ProductProvider {
 
 
         return new Promise((resolve, reject) => {
-            this.http.get(this.localUrl + 'products/' + id, { headers: headers }).subscribe(res => {
+            this.http.get(localStorage.getItem('api_endpoint') + 'products/' + id, { headers: headers }).subscribe(res => {
                 resolve(res);
             }, (error) => {
-                reject(error)
+                reject(error.error.message.split(','))
             })
         })
     }

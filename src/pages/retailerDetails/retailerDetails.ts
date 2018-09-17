@@ -54,9 +54,16 @@ export class RetailerDetailsPage {
                 }
             })
                 .catch((err) => {
+                    let message = "<ul>"
+                    for (let text of err) {
+                        if (text) {
+                            message += "<li>" + text + "</li>";
+                        }
+                    }
+                    message += "</ul>"
                     let alert = this.alertCtrl.create({
                         title: 'Error',
-                        subTitle: err.message,
+                        subTitle: message,
                         buttons: ['Ok']
                     })
                     alert.present();
@@ -72,9 +79,16 @@ export class RetailerDetailsPage {
                 }
             })
                 .catch((err) => {
+                    let message = "<ul>"
+                    for (let text of err) {
+                        if (text) {
+                            message += "<li>" + text + "</li>";
+                        }
+                    }
+                    message += "</ul>"
                     let alert = this.alertCtrl.create({
                         title: 'Error',
-                        subTitle: err.message,
+                        subTitle: message,
                         buttons: ['Ok']
                     })
                     alert.present();

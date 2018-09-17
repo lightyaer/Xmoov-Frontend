@@ -15,66 +15,26 @@
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
 
-.ion-card-header {
-    text-align: center;
-    display: block;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
-.deleteIon-icon{
-    display: inline-block;
-    font-size: 26px;
-    margin-top: 14px;
-    z-index: 99;
-
-}
-
-.toolbar-title-md {
-    margin: 0px 100px auto;
-    font-size: 2rem;
-    overflow: visible;
-    font-weight: 500;
-    color: #424242;
-}
-
 .noRecords {
     text-align: center;
     margin: 15px auto;
 }
 
 .centeredText {
-    text-align: center;
+        text-align: center;
 }
 
-
-.buttonItem {
-    border-radius: 7px;
-    margin-top: 15px;
-    z-index: 100;
-
-}
-
-.margin-b55 {
-    margin-bottom: 55px;
+.nameInMenu {
+    font-size: x-large;
+    font-weight: bold;
 }
 
 .bottomButton{
-    bottom: 0px;
-    position: fixed;
     margin-bottom: 0px;
     padding: 25px;
     padding-left: 0px !important;
     padding-right: 0px !important;
-}
-
-.menuButton {
-    margin-bottom: 0px;
-    position: fixed;
-    bottom: 0px;
-    height: 4.6rem;
-}
+} 
 
 .pl-18{
     padding-left: 18px;

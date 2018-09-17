@@ -1,20 +1,17 @@
 <ion-header>
+
     <ion-navbar color="primary">
-        <button ion-button icon-only menuToggle>
+        <button ion-button menuToggle="left">
             <ion-icon name="menu"></ion-icon>
         </button>
-
         <ion-title>
-            <ion-label>{{ title }}</ion-label>
+            {{title}}
         </ion-title>
     </ion-navbar>
 </ion-header>
 
-<!-- title="{{ 'PURCHASEORDER' | translate}}"
-title="{{ 'SALESORDER' | translate}}"
-title="{{ 'RETAILER' | translate}}" -->
 <ion-content>
-    <super-tabs [config]="{ sideMenu: 'left' }" tabsPlacement="bottom" toolbarColor="dark" toolbarBackground="secondary"
+    <super-tabs [config]="{ sideMenu: 'left' }" tabsPlacement="bottom" toolbarColor="light" toolbarBackground="primary"
         indicatorColor="light" badgeColor="light" (tabSelect)="onTabSelect($event)" selectedTabIndex="1">
         <super-tab [root]="PurchaseOrders" icon="pricetags" [rootParams]="this.navData"></super-tab>
         <super-tab [root]="SalesOrders" icon="bus" [rootParams]="this.navData"></super-tab>

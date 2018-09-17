@@ -1,6 +1,6 @@
 <ion-header>
     <ion-navbar color="primary">
-        <ion-title class="centeredText">
+        <ion-title>
             {{title}}
         </ion-title>
         <ion-buttons end>
@@ -15,19 +15,19 @@
 
     <ion-row>
         <ion-col>
-            <img class="orderStausIcon" (click)="orderStatus.orderCreated = !orderStatus.orderCreated;" [src]="orderStatus.orderCreated ? '/assets/icon/oc-on.png' : '/assets/icon/oc-off.png' " />
+            <img class="orderStausIcon" (click)="orderStatus.orderCreated = !orderStatus.orderCreated;" [src]="orderStatus.orderCreated ? 'assets/icon/oc-on.png' : 'assets/icon/oc-off.png' " />
         </ion-col>
         <ion-col>
-            <img class="orderStausIcon" (click)="orderStatus.procured = !orderStatus.procured;" [src]="orderStatus.procured ? '/assets/icon/p-on.png' : '/assets/icon/p-off.png' " />
+            <img class="orderStausIcon" (click)="orderStatus.procured = !orderStatus.procured;" [src]="orderStatus.procured ? 'assets/icon/p-on.png' : 'assets/icon/p-off.png' " />
         </ion-col>
         <ion-col>
-            <img class="orderStausIcon" (click)="orderStatus.inTransit = !orderStatus.inTransit;" [src]="orderStatus.inTransit ? '/assets/icon/it-on.png' : '/assets/icon/it-off.png' " />
+            <img class="orderStausIcon" (click)="orderStatus.inTransit = !orderStatus.inTransit;" [src]="orderStatus.inTransit ? 'assets/icon/it-on.png' : 'assets/icon/it-off.png' " />
         </ion-col>
         <ion-col>
-            <img class="orderStausIcon" (click)="orderStatus.delivered = !orderStatus.delivered;" [src]="orderStatus.delivered ? '/assets/icon/d-on.png' : '/assets/icon/d-off.png' " />
+            <img class="orderStausIcon" (click)="orderStatus.delivered = !orderStatus.delivered;" [src]="orderStatus.delivered ? 'assets/icon/d-on.png' : 'assets/icon/d-off.png' " />
         </ion-col>
         <ion-col>
-            <img class="orderStausIcon" (click)="orderStatus.cashCollected = !orderStatus.cashCollected;" [src]="orderStatus.cashCollected ? '/assets/icon/cc-on.png' : '/assets/icon/cc-off.png' " />
+            <img class="orderStausIcon" (click)="orderStatus.cashCollected = !orderStatus.cashCollected;" [src]="orderStatus.cashCollected ? 'assets/icon/cc-on.png' : 'assets/icon/cc-off.png' " />
         </ion-col>
     </ion-row>
 
@@ -86,12 +86,12 @@
         <ion-input [ngModel]="salesOrder.discount" (ngModelChange)="salesOrder.discount=$event" type="number"
             (ngModelChange)="calcTotal()"></ion-input>
     </ion-item>
-    <ion-item class="margin-b55">
+    <ion-item>
         <ion-label floating>{{'GRANDTOTAL' | translate}}</ion-label>
         <ion-input readonly="true" [ngModel]="salesOrder.grandTotal" (ngModelChange)="salesOrder.grandTotal=$event"
             type="number"></ion-input>
     </ion-item>
 </ion-content>
-<div position="bottom">
-    <button ion-button block class="buttonItem bottomButton" color="primary" (click)="saveSalesOrder()">Submit</button>
-</div>
+<ion-footer>
+    <button ion-button block class="bottomButton" color="primary" (click)="saveSalesOrder()">Submit</button>
+</ion-footer>

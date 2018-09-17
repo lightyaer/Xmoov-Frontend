@@ -1,24 +1,21 @@
 <ion-header>
     <ion-navbar color="primary">
-        <ion-title class="centeredText">
+        <ion-title>
             {{'SETTINGS' | translate}}
         </ion-title>
     </ion-navbar>
 </ion-header>
 
 <ion-content>
-
     <ion-item>
         <ion-label>
             {{'LANGUAGE' | translate }}
         </ion-label>
-
     </ion-item>
-
-    <button ion-button block class="buttonItem" (click)="changeLanguagetoEnglish()" *ngIf="this.arabic" color="light">
+    <button ion-button block full (tap)="changeLanguagetoEnglish()" *ngIf="this.arabic" color="light">
         {{ 'ENGLISH' | translate }}</button>
 
-    <button ion-button block class="buttonItem" (click)="changeLanguagetoArabic()" *ngIf="this.english" color="light">
+    <button ion-button block full (tap)="changeLanguagetoArabic()" *ngIf="this.english" color="light">
         {{ 'ARABIC' | translate }}</button>
 
 

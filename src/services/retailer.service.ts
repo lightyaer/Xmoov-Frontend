@@ -1,18 +1,15 @@
 
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import 'rxjs/add/operator/map';
 import { Retailer } from '../models/retailer';
 import { RetailerFilters } from '../models/retailerFilters';
+
 
 @Injectable()
 export class RetailerProvider {
 
-    localUrl: string;
-    productionUrl: string;
     constructor(public http: HttpClient) {
-      // this.localUrl = 'https://xmoov.herokuapp.com/';
-       this.localUrl = 'http://localhost:3000/';
+
     }
 
     saveRetailer(retailer: Retailer) {
@@ -24,10 +21,11 @@ export class RetailerProvider {
         };
 
         return new Promise((resolve, reject) => {
-            this.http.post(this.localUrl + 'retailers/create', JSON.stringify(retailer), httpOptions).subscribe(res => {
+            this.http.post(localStorage.getItem('api_endpoint') + 'retailers/create', JSON.stringify(retailer), httpOptions).subscribe(res => {
                 resolve(res);
             }, (error) => {
-                reject(error)
+                console.log(error.error.message.split(','));
+                reject(error.error.message.split(','))
             })
         })
     }
@@ -41,10 +39,10 @@ export class RetailerProvider {
         };
 
         return new Promise((resolve, reject) => {
-            this.http.get(this.localUrl + 'retailers/' + id, httpOptions).subscribe(res => {
+            this.http.get(localStorage.getItem('api_endpoint') + 'retailers/' + id, httpOptions).subscribe(res => {
                 resolve(res);
             }, (error) => {
-                reject(error)
+                reject(error.error.message.split(','))
             })
         })
     }
@@ -58,10 +56,10 @@ export class RetailerProvider {
         };
 
         return new Promise((resolve, reject) => {
-            this.http.delete(this.localUrl + 'retailers/' + id, httpOptions).subscribe(res => {
+            this.http.delete(localStorage.getItem('api_endpoint') + 'retailers/' + id, httpOptions).subscribe(res => {
                 resolve(res);
             }, (error) => {
-                reject(error)
+                reject(error.error.message.split(','))
             })
         })
     }
@@ -78,10 +76,10 @@ export class RetailerProvider {
 
 
         return new Promise((resolve, reject) => {
-            this.http.get(this.localUrl + 'retailers/all', { headers: headers, params: params }).subscribe(res => {
+            this.http.get(localStorage.getItem('api_endpoint') + 'retailers/all', { headers: headers, params: params }).subscribe(res => {
                 resolve(res);
             }, (error) => {
-                reject(error)
+                reject(error.error.message.split(','))
             })
         })
     }
@@ -95,10 +93,10 @@ export class RetailerProvider {
         };
 
         return new Promise((resolve, reject) => {
-            this.http.patch(this.localUrl + 'retailers/' + retailer._id, JSON.stringify(retailer), httpOptions).subscribe(res => {
+            this.http.patch(localStorage.getItem('api_endpoint') + 'retailers/' + retailer._id, JSON.stringify(retailer), httpOptions).subscribe(res => {
                 resolve(res);
             }, (error) => {
-                reject(error)
+                reject(error.error.message.split(','))
             })
         })
     }

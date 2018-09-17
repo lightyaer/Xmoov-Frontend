@@ -12,9 +12,6 @@ import { SelectSearchableComponent } from 'ionic-select-searchable';
 import { TranslateService } from '@ngx-translate/core';
 import { ConfigProductPage } from '../config-product/config-product';
 
-
-
-
 @Component({
     selector: 'page-salesOrderDetails',
     templateUrl: 'salesOrderDetails.html'
@@ -87,7 +84,7 @@ export class SalesOrderDetailsPage {
 
     calcTotal() {
         this.salesOrder.total = 0;
-        this.salesOrder.productObjects.map(item => {
+        this.salesOrder.products.map(item => {
             this.salesOrder.total += +item.price * item.quantity;
         })
 
@@ -99,9 +96,6 @@ export class SalesOrderDetailsPage {
         this.salesOrder.grandTotal = +this.salesOrder.grandTotal.toFixed(2);
 
     }
-
-
-
 
     searchProducts(event: {
         component: SelectSearchableComponent,
@@ -131,7 +125,8 @@ export class SalesOrderDetailsPage {
             modal.onDidDismiss(products => {
                 if (products) {
                     this.selectedProducts = products;
-                    this.salesOrder.productObjects = products;
+                    this.salesOrder.products = products;
+                    this.calcTotal();
                 }
             })
         }
@@ -147,16 +142,18 @@ export class SalesOrderDetailsPage {
         this.salesOrderService.getSalesOrderByID(id).then((res: SalesOrder) => {
             this.salesOrder = res;
             this.orderStatus = res.orderStatus;
-            this.selectedProducts = res.productObjects;
-            this.salesOrder.orderDate = new Date(res.orderDate).toISOString();
+            this.selectedProducts = res.products;
+            console.log(this.selectedProducts);
+            //this.salesOrder.orderDate = new Date(res.orderDate).ge
             this.dismissLoader();
         })
     }
 
     saveSalesOrder() {
-
+        console.log(this.salesOrder.orderDate);
         this.salesOrder.orderStatus = this.orderStatus;
-        this.salesOrder.orderDate = new Date(this.salesOrder.orderDate).getTime().toString();
+        //  this.salesOrder.orderDate = new Date(this.salesOrder.orderDate).getTime().toString();
+        console.log(this.salesOrder.orderDate);
         if (!this.navArgs.data.id) {
             this.salesOrderService.saveSalesOrder(this.salesOrder).then((res) => {
                 let toast = this.toastCtrl.create({
@@ -169,9 +166,16 @@ export class SalesOrderDetailsPage {
                 this.viewCtrl.dismiss();
             })
                 .catch((err) => {
+                    let message = "<ul>"
+                    for (let text of err) {
+                        if (text) {
+                            message += "<li>" + text + "</li>";
+                        }
+                    }
+                    message += "</ul>"
                     let alert = this.alertCtrl.create({
                         title: 'Error',
-                        subTitle: err.message,
+                        subTitle: message,
                         buttons: ['Ok']
                     })
                     alert.present();
@@ -187,9 +191,16 @@ export class SalesOrderDetailsPage {
                 }
             })
                 .catch((err) => {
+                    let message = "<ul>"
+                    for (let text of err) {
+                        if (text) {
+                            message += "<li>" + text + "</li>";
+                        }
+                    }
+                    message += "</ul>"
                     let alert = this.alertCtrl.create({
                         title: 'Error',
-                        subTitle: err.message,
+                        subTitle: message,
                         buttons: ['Ok']
                     })
                     alert.present();

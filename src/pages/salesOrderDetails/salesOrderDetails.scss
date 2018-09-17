@@ -1,10 +1,13 @@
-.orderStatusIcon {
-    font-size: 35px;
-}
 
-.orderStausIcon {
-    max-width: 100%;
-    border: 0;
-    margin-left: 20px;
-    width: 35px;
+page-salesOrderDetails {
+    .orderStatusIcon {
+        font-size: 35px;
+    }
+    
+    .orderStausIcon {
+        max-width: 100%;
+        border: 0;
+        margin-left: 20px;
+        width: 35px;
+    }
 }

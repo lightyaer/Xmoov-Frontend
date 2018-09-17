@@ -1,24 +1,4 @@
 page-homeTabs {
-
-    .toolbar-title-md {
-  
-        margin: 0px 100px auto;
-        font-size: 2rem;
-        font-weight: 500;
-        padding-left: 0px !important;
-    }
-    
-    .toolbar-title-ios {
-        text-align: center;
-        font-size: 1.7rem;
-        font-weight: 600;
-        pointer-events: auto;
-    }
-    
-    .ion-md-home:before {
-        content: "\f30c";
-        padding-left: 25px;
-    }
     
     super-tabs-toolbar > ion-toolbar.toolbar .tab-buttons-container .tab-buttons super-tab-button.title-and-icon {
         height: 60px;

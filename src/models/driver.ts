@@ -6,5 +6,6 @@ export class Driver {
     address: string = "";
     email: string = "";
     password: string = "";
+    lang: string = "";
     repassword: string = "";
 }

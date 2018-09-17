@@ -62,7 +62,7 @@ export class SalesOrdersPage {
   }
 
   gotoAddSalesOrderPage() {
-    let modal = this.modalCtrl.create(SalesOrderDetailsPage, { title: 'Add Sales Order', });
+    let modal = this.modalCtrl.create(SalesOrderDetailsPage);
 
     modal.present();
     modal.onDidDismiss(() => {

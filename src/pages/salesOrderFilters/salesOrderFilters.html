@@ -1,6 +1,6 @@
 <ion-header>
     <ion-navbar color="primary">
-        <ion-title class="centeredText">
+        <ion-title>
             {{'SALESORDERFILTERS' | translate}}
         </ion-title>
         <ion-buttons end>
@@ -32,10 +32,10 @@
             </ion-label>
             <ion-datetime [ngModel]="filters.orderDate" (ngModelChange)="filters.orderDate=$event" (ionCancel)="clearOrderDate()"></ion-datetime>
         </ion-item>
-
-        <button ion-button block (tap)="filterSalesOrders()"> Search </button>
-
-
     </ion-list>
 
 </ion-content>
+<ion-footer>
+    <button ion-button block full class="bottomButton" (tap)="filterSalesOrders()"> Search </button>
+
+</ion-footer>

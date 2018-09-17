@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, AlertController, MenuController } from 'ionic-angular';
 import { Driver } from '../../models/driver';
-import { LoginProvider } from '../../services/driver.service';
+import { DriverProvider } from '../../services/driver.service';
 
 import { OtpAuthPage } from '../otpAuth/otpAuth';
 
@@ -16,7 +16,7 @@ export class SignupPage {
     driver: Driver;
 
     constructor(public navCtrl: NavController,
-        private loginService: LoginProvider,
+        private loginService: DriverProvider,
         private alertCtrl: AlertController,
         private menuCtrl: MenuController
     ) {

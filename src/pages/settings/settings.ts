@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { TranslateService } from '@ngx-translate/core';
-
+import { DriverProvider } from '../../services/driver.service';
 @Component({
   selector: 'page-settings',
   templateUrl: 'settings.html'
@@ -12,7 +12,8 @@ export class SettingsPage {
   english: boolean;
 
   constructor(public navCtrl: NavController,
-    public translate: TranslateService
+    public translate: TranslateService,
+    private driverService: DriverProvider
   ) {
 
     this.arabic = this.translate.getDefaultLang() == 'ar' ? true : false;
@@ -22,6 +23,7 @@ export class SettingsPage {
 
   changeLanguagetoEnglish() {
     this.translate.setDefaultLang('en');
+    this.driverService.setLanguage('en');
     this.english = true;
     this.arabic = false;
 
@@ -30,6 +32,7 @@ export class SettingsPage {
 
   changeLanguagetoArabic() {
     this.translate.setDefaultLang('ar');
+    this.driverService.setLanguage('ar');
     this.arabic = true;
     this.english = false;
   }

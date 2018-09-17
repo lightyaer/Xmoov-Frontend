@@ -3,14 +3,12 @@ import { Injectable } from '@angular/core';
 import { PurchaseOrder } from '../models/purchaseOrder';
 import { PurchaseOrderFilters } from '../models/purchaseOrderFilters';
 
+
 @Injectable()
 export class PurchaseOrderProvider {
 
-    localUrl: string;
-    productionUrl: string;
     constructor(public http: HttpClient) {
-        // this.localUrl = 'https://xmoov.herokuapp.com/';
-        this.localUrl = 'http://localhost:3000/';
+
     }
 
     savePurchaseOrder(purchaseOrder: PurchaseOrder) {
@@ -22,10 +20,10 @@ export class PurchaseOrderProvider {
         };
 
         return new Promise((resolve, reject) => {
-            this.http.post(this.localUrl + 'purchaseorders/create', JSON.stringify(purchaseOrder), httpOptions).subscribe(res => {
+            this.http.post(localStorage.getItem('api_endpoint') + 'purchaseorders/create', JSON.stringify(purchaseOrder), httpOptions).subscribe(res => {
                 resolve(res);
             }, (error) => {
-                reject(error)
+                reject(error.error.message.split(','))
             })
         })
     }
@@ -39,10 +37,10 @@ export class PurchaseOrderProvider {
         };
 
         return new Promise((resolve, reject) => {
-            this.http.patch(this.localUrl + 'purchaseorders/' + purchaseOrder._id, JSON.stringify(purchaseOrder), httpOptions).subscribe(res => {
+            this.http.patch(localStorage.getItem('api_endpoint') + 'purchaseorders/' + purchaseOrder._id, JSON.stringify(purchaseOrder), httpOptions).subscribe(res => {
                 resolve(res);
             }, (error) => {
-                reject(error)
+                reject(error.error.message.split(','))
             })
         })
 
@@ -57,10 +55,10 @@ export class PurchaseOrderProvider {
         };
 
         return new Promise((resolve, reject) => {
-            this.http.delete(this.localUrl + 'purchaseorders/' + id, httpOptions).subscribe(res => {
+            this.http.delete(localStorage.getItem('api_endpoint') + 'purchaseorders/' + id, httpOptions).subscribe(res => {
                 resolve(res);
             }, (error) => {
-                reject(error)
+                reject(error.error.message.split(','))
             })
         })
     }
@@ -74,10 +72,10 @@ export class PurchaseOrderProvider {
         };
 
         return new Promise((resolve, reject) => {
-            this.http.get(this.localUrl + 'purchaseorders/' + id, httpOptions).subscribe(res => {
+            this.http.get(localStorage.getItem('api_endpoint') + 'purchaseorders/' + id, httpOptions).subscribe(res => {
                 resolve(res);
             }, (error) => {
-                reject(error)
+                reject(error.error.message.split(','))
             })
         })
     }
@@ -94,10 +92,10 @@ export class PurchaseOrderProvider {
 
 
         return new Promise((resolve, reject) => {
-            this.http.get(this.localUrl + 'purchaseorders/all', { headers: headers, params: params }).subscribe(res => {
+            this.http.get(localStorage.getItem('api_endpoint') + 'purchaseorders/all', { headers: headers, params: params }).subscribe(res => {
                 resolve(res);
             }, (error) => {
-                reject(error)
+                reject(error.error.message.split(','))
             })
         })
     }
@@ -109,10 +107,10 @@ export class PurchaseOrderProvider {
         })
 
         return new Promise((resolve, reject) => {
-            this.http.get(this.localUrl + 'purchaseorders/getQuantities/' + salesOrder_id, { headers: headers }).subscribe(res => {
+            this.http.get(localStorage.getItem('api_endpoint') + 'purchaseorders/getQuantities/' + salesOrder_id, { headers: headers }).subscribe(res => {
                 resolve(res);
             }, (error) => {
-                reject(error)
+                reject(error.error.message.split(','))
             })
         })
     }

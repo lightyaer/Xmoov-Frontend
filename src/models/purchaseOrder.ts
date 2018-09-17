@@ -1,5 +1,5 @@
 import { Product } from "./product";
-
+import { Quantities } from './common'
 
 export class PurchaseOrder {
     _id: string;
@@ -8,19 +8,14 @@ export class PurchaseOrder {
     total: number = 0;
     _author: string;
     _salesOrder: string;
-
     remarks: string;
     __v: number;
-    productObjects: Product[];
+    _orderProducts: Quantities[];
+    products: Product[];
     grandTotal: number = 0;
 
 }
 
 
-export interface Quantities {
-    _id: string;
-    _product: string;
-    quantity: number;
-}
 
 
