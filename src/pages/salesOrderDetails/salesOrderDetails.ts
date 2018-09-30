@@ -1,3 +1,4 @@
+import { ReceiptsPage } from './../receipts/receipts';
 import { Component, ViewChild } from '@angular/core';
 import { NavController, ViewController, NavParams, ToastController, AlertController, LoadingController, ModalController } from 'ionic-angular';
 import { SalesOrder } from '../../models/salesOrder';
@@ -31,7 +32,7 @@ export class SalesOrderDetailsPage {
 
     constructor(public navCtrl: NavController,
         private viewCtrl: ViewController,
-        private navArgs: NavParams,
+        public navArgs: NavParams,
         private salesOrderService: SalesOrderProvider,
         private toastCtrl: ToastController,
         private alertCtrl: AlertController,
@@ -143,8 +144,6 @@ export class SalesOrderDetailsPage {
             this.salesOrder = res;
             this.orderStatus = res.orderStatus;
             this.selectedProducts = res.products;
-            console.log(this.selectedProducts);
-            //this.salesOrder.orderDate = new Date(res.orderDate).ge
             this.dismissLoader();
         })
     }
@@ -207,6 +206,11 @@ export class SalesOrderDetailsPage {
                 })
             this.viewCtrl.dismiss();
         }
+    }
+
+    printSalesOrder() {
+        let modal = this.modalCtrl.create(ReceiptsPage, { salesOrder: this.salesOrder });
+        modal.present();
     }
 
 }

@@ -1,3 +1,4 @@
+import { ReceiptsPage } from './../pages/receipts/receipts';
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
@@ -9,7 +10,7 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { SelectSearchableModule } from 'ionic-select-searchable';
-
+import { DocumentViewer } from '@ionic-native/document-viewer';
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
@@ -37,7 +38,9 @@ import { PurchaseOrderProvider } from '../services/purchaseOrder.service';
 import { ProductProvider } from '../services/product.service';
 import { ConfigProductPage } from '../pages/config-product/config-product';
 import { ConfigProvider } from '../services/config.service';
-
+import { File } from '@ionic-native/file';
+import { FileOpener } from '@ionic-native/file-opener';
+import { ReceiptProvider } from '../services/receipts.service';
 
 let pages = [
   MyApp,
@@ -54,7 +57,8 @@ let pages = [
   SalesOrderFiltersPage,
   PurchaseOrdersPage,
   PurchaseOrderDetailsPage,
-  ConfigProductPage
+  ConfigProductPage,
+  ReceiptsPage
 ]
 
 
@@ -82,12 +86,16 @@ let pages = [
     StatusBar,
     SplashScreen,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
+    File,
+    FileOpener,
+    DocumentViewer,
     DriverProvider,
     RetailerProvider,
     SalesOrderProvider,
     ProductProvider,
     PurchaseOrderProvider,
-    ConfigProvider
+    ConfigProvider,
+    ReceiptProvider
   ]
 })
 export class AppModule { }

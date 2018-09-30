@@ -93,5 +93,14 @@
     </ion-item>
 </ion-content>
 <ion-footer>
-    <button ion-button block class="bottomButton" color="primary" (click)="saveSalesOrder()">Submit</button>
+    <ion-row>
+        <ion-col>
+            <button ion-button block class="bottomButton" color="primary" (click)="saveSalesOrder()">Submit</button>
+        </ion-col>
+        <ion-col *ngIf="this.navArgs.data.id" >
+            <button ion-button block class="bottomButton" color="primary" (click)="printSalesOrder()">Generate Receipt</button>
+        </ion-col>
+    </ion-row>
+
+
 </ion-footer>

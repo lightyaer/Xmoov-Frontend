@@ -45,5 +45,6 @@
     "SETTINGS": "Settings",
     "CREATE": "Add",
     "EDIT": "Edit",
-    "HOME": "Home"
+    "HOME": "Home",
+    "RECEIPT":"Receipt"
 }
